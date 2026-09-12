@@ -58,7 +58,7 @@ import yfinance as yf
 # ---------------------------------------------------------------------------
 # Config — this is what you edit day to day
 # ---------------------------------------------------------------------------
-STRATEGY = "trend_momentum_volume"   # <-- change this to switch strategies
+STRATEGY = "macro_news_overlay"   # <-- change this to switch strategies
 
 UNIVERSE = [
     {"ticker": "ZENSARTECH.NS", "name": "Zensar Tech", "cap": "mid"},
