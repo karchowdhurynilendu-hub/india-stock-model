@@ -1,0 +1,1 @@
+# india-stock-model
