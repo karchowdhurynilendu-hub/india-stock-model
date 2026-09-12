@@ -1,0 +1,476 @@
+"""
+India Equities Signal Model — pluggable strategy runner
+----------------------------------------------------------
+Fetches daily OHLCV data for a universe of NSE-listed stocks, hands it to
+whichever strategy is selected below, backtests that strategy's signal,
+and writes today's ranked recommendations to a JSON file for the
+dashboard to read.
+
+TO SWITCH STRATEGIES:
+    Change the STRATEGY variable below to the filename (without .py) of
+    any module in the strategies/ folder. Four are included:
+        "trend_momentum_volume"  (default — trend + RSI + volume)
+        "macd_crossover"         (MACD line/signal crossover + volume)
+        "momentum_breakout"      (aggressive early-momentum / breakout watchlist)
+        "macro_news_overlay"     (trend/momentum + global macro + news sentiment)
+
+TO ADD YOUR OWN STRATEGY:
+    Create a new file in strategies/, e.g. strategies/my_strategy.py,
+    implementing this contract:
+
+        build_signal(df) -> df
+            Takes a pandas DataFrame with columns Open, High, Low, Close,
+            Volume (daily bars, oldest first). Must return that same
+            DataFrame with an added 'composite' column: a float score
+            where positive = bullish lean, negative = bearish lean,
+            magnitude = conviction. You can add any other columns you
+            want (e.g. your own indicator values).
+
+        label_recommendation(composite_value) -> str
+            Takes the latest composite score and returns a short label,
+            e.g. "Strong watch (bullish)".
+
+    Optional:
+        detect_pattern(row) -> (name, bias) or None
+            Row is the latest bar. Return a (pattern_name, bias) tuple
+            or None. Shown as an informational tag only.
+
+        STRATEGY_LABEL = "Your strategy's display name"
+
+    Then set STRATEGY = "my_strategy" below. No other code needs to
+    change — the backtest and output format are generic and work with
+    any strategy that produces a 'composite' column.
+
+Requires: pip install yfinance pandas numpy
+"""
+
+import importlib
+import json
+import os
+import sys
+import time
+from datetime import datetime, timezone
+
+import numpy as np
+import pandas as pd
+import yfinance as yf
+
+# ---------------------------------------------------------------------------
+# Config — this is what you edit day to day
+# ---------------------------------------------------------------------------
+STRATEGY = "trend_momentum_volume"   # <-- change this to switch strategies
+
+UNIVERSE = [
+    {"ticker": "ZENSARTECH.NS", "name": "Zensar Tech", "cap": "mid"},
+    {"ticker": "KEI.NS", "name": "KEI Industries", "cap": "mid"},
+    {"ticker": "SONATSOFTW.NS", "name": "Sonata Software", "cap": "small"},
+    {"ticker": "APTUS.NS", "name": "Aptus Value Housing", "cap": "small"},
+    {"ticker": "REDINGTON.NS", "name": "Redington", "cap": "mid"},
+    {"ticker": "ANURAS.NS", "name": "Anupam Rasayan", "cap": "small"},
+    {"ticker": "CRAFTSMAN.NS", "name": "Craftsman Automation", "cap": "mid"},
+    {"ticker": "GRAVITA.NS", "name": "Gravita India", "cap": "small"},
+    {"ticker": "HBLENGINE.NS", "name": "HBL Engineering (formerly HBL Power)", "cap": "small"},
+    {"ticker": "COHANCE.NS", "name": "Cohance Lifesciences (formerly Suven Pharma)", "cap": "small"},
+    {"ticker": "RAINBOW.NS", "name": "Rainbow Childrens Hosp", "cap": "small"},
+    {"ticker": "TCIEXP.NS", "name": "TCI Express", "cap": "mid"},
+    {"ticker": "RELIANCE.NS", "name": "Reliance Industries", "cap": "large"},
+    {"ticker": "HDFCBANK.NS", "name": "HDFC Bank", "cap": "large"},
+]
+
+LOOKBACK_DAYS = "1y"
+BACKTEST_HOLD_DAYS = 10
+BACKTEST_THRESHOLD = 1.0   # |composite| at or above this counts as a signal in the backtest
+
+
+# ---------------------------------------------------------------------------
+# Strategy loading — generic, doesn't need to change when you add strategies
+# ---------------------------------------------------------------------------
+def load_strategy(name):
+    strategies_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "strategies")
+    if strategies_dir not in sys.path:
+        sys.path.insert(0, strategies_dir)
+    module = importlib.import_module(name)
+    for required in ("build_signal", "label_recommendation"):
+        if not hasattr(module, required):
+            raise ImportError(
+                f"Strategy '{name}' is missing required function: {required}(). "
+                f"See the contract described at the top of india_stock_model.py."
+            )
+    return module
+
+
+# ---------------------------------------------------------------------------
+# Generic backtest — works against any strategy's 'composite' column
+# ---------------------------------------------------------------------------
+def backtest(df, threshold=BACKTEST_THRESHOLD):
+    signals = df[df["composite"].abs() >= threshold].copy()
+    outcomes = []
+    for idx in signals.index:
+        pos = df.index.get_loc(idx)
+        if pos + BACKTEST_HOLD_DAYS >= len(df):
+            continue
+        entry_price = df["Close"].iloc[pos]
+        exit_price = df["Close"].iloc[pos + BACKTEST_HOLD_DAYS]
+        fwd_return = (exit_price - entry_price) / entry_price
+        direction = 1 if df["composite"].iloc[pos] > 0 else -1
+        correct = (fwd_return > 0 and direction > 0) or (fwd_return < 0 and direction < 0)
+        outcomes.append(correct)
+    if not outcomes:
+        return None
+    return round(100 * sum(outcomes) / len(outcomes), 1)
+
+
+# ---------------------------------------------------------------------------
+# Run the scan
+# ---------------------------------------------------------------------------
+def run_scan():
+    strategy = load_strategy(STRATEGY)
+    strategy_label = getattr(strategy, "STRATEGY_LABEL", STRATEGY)
+    results = []
+
+    for stock in UNIVERSE:
+        try:
+            hist = yf.download(
+                stock["ticker"], period=LOOKBACK_DAYS, interval="1d",
+                auto_adjust=True, progress=False,
+            )
+            # Newer yfinance versions return two-level ("MultiIndex") columns
+            # even for a single ticker, which breaks comparisons like
+            # SMA20 > SMA50 with "Operands are not aligned". Flatten it.
+            if isinstance(hist.columns, pd.MultiIndex):
+                hist.columns = hist.columns.get_level_values(0)
+            if hist.empty or len(hist) < 60:
+                continue
+
+            hist = strategy.build_signal(hist)
+            if "composite" not in hist.columns:
+                raise ValueError("strategy.build_signal() did not add a 'composite' column")
+
+            latest = hist.iloc[-1]
+            pattern = strategy.detect_pattern(latest) if hasattr(strategy, "detect_pattern") else None
+            win_rate = backtest(hist)
+
+            # Generic pass-through: any column a strategy names with a
+            # "_display" suffix is surfaced in the output automatically,
+            # under its name with that suffix stripped. This lets new
+            # strategies add their own fields (e.g. macro_tailwind,
+            # roc_20d_pct) without any changes needed here.
+            extra_fields = {}
+            for col in hist.columns:
+                if col.endswith("_display"):
+                    val = latest[col]
+                    key = col[: -len("_display")]
+                    if isinstance(val, (float, np.floating)) and pd.isna(val):
+                        extra_fields[key] = None
+                    elif isinstance(val, (np.bool_,)):
+                        extra_fields[key] = bool(val)
+                    elif isinstance(val, (np.integer, np.floating)):
+                        extra_fields[key] = round(float(val), 2)
+                    else:
+                        extra_fields[key] = val
+
+            result = {
+                "ticker": stock["ticker"],
+                "name": stock["name"],
+                "cap": stock["cap"],
+                "price": round(float(latest["Close"]), 2),
+                "composite_score": round(float(latest["composite"]), 2),
+                "recommendation": strategy.label_recommendation(latest["composite"]),
+                "candle_pattern": pattern[0] if pattern else None,
+                "candle_bias": pattern[1] if pattern else None,
+                "backtest_win_rate_pct": win_rate,
+            }
+            result.update(extra_fields)
+            results.append(result)
+            time.sleep(0.3)  # be polite to the data source
+        except Exception as e:
+            print(f"Skipped {stock['ticker']}: {e}")
+
+    results.sort(key=lambda r: abs(r["composite_score"]), reverse=True)
+
+    output = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "model": strategy_label,
+        "strategy_file": STRATEGY,
+        "hold_period_days_for_backtest": BACKTEST_HOLD_DAYS,
+        "results": results,
+    }
+
+    with open("india_stock_signals.json", "w") as f:
+        json.dump(output, f, indent=2)
+
+    print(f"Strategy: {strategy_label}")
+    print(f"Wrote {len(results)} results to india_stock_signals.json")
+    return output
+
+
+if __name__ == "__main__":
+    run_scan()
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>India equities signal dashboard</title>
+<style>
+  :root{
+    --bg:#0c0e11; --panel:#14171c; --panel-2:#191d23; --border:#2a2e35;
+    --text:#e7e4da; --text-dim:#8b909a; --text-faint:#5c6169;
+    --up:#3fbf7f; --down:#e5484d; --accent:#d9a441;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); padding:32px 40px 80px;
+  }
+  h1{
+    font-size:15px; font-weight:600; letter-spacing:0.02em;
+    margin:0 0 4px; color:var(--text);
+  }
+  .subhead{
+    font-family:var(--mono); font-size:12px; color:var(--text-faint); margin:0 0 28px;
+  }
+  .loader{
+    display:flex; gap:12px; align-items:center; margin-bottom:28px;
+    border:1px solid var(--border); background:var(--panel);
+    padding:14px 16px; border-radius:4px; flex-wrap:wrap;
+  }
+  .loader label{
+    font-size:12px; color:var(--text-dim); font-family:var(--mono);
+  }
+  input[type=file]{
+    font-family:var(--sans); font-size:12px; color:var(--text-dim);
+  }
+  textarea{
+    width:100%; min-height:70px; background:var(--panel-2); color:var(--text);
+    border:1px solid var(--border); border-radius:4px; padding:8px;
+    font-family:var(--mono); font-size:11px; resize:vertical;
+  }
+  button{
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:7px 14px; font-size:12px; cursor:pointer;
+    font-family:var(--sans);
+  }
+  button:hover{border-color:var(--text-dim);}
+  .filters{
+    display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  select{
+    background:var(--panel); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:6px 10px; font-size:12px; font-family:var(--sans);
+  }
+  .metrics{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border);
+    margin-bottom:28px; border-radius:4px; overflow:hidden;
+  }
+  .metric{ background:var(--panel); padding:14px 16px; }
+  .metric .label{ font-size:11px; color:var(--text-faint); font-family:var(--mono); margin-bottom:6px;}
+  .metric .value{ font-size:22px; font-weight:600; font-family:var(--mono);}
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  thead th{
+    text-align:left; font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    font-weight:400; padding:8px 12px; border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:10px 12px; border-bottom:1px solid var(--border); font-family:var(--sans);
+  }
+  tbody tr:hover{ background:var(--panel); }
+  .num{ font-family:var(--mono); text-align:right; }
+  .ticker{ font-family:var(--mono); color:var(--text-dim); font-size:11px; }
+  .name{ font-weight:500; }
+  .up{ color:var(--up); }
+  .down{ color:var(--down); }
+  .neutral{ color:var(--text-dim); }
+  .badge{
+    display:inline-block; padding:3px 9px; border-radius:3px; font-size:11px;
+    font-family:var(--mono); border:1px solid var(--border);
+  }
+  .cap-small{ color:var(--accent); border-color:var(--accent); }
+  .empty{ padding:40px 0; text-align:center; color:var(--text-faint); font-size:13px; }
+</style>
+</head>
+<body>
+
+<h1>India equities signal dashboard</h1>
+<p class="subhead" id="genTime">No data loaded yet</p>
+
+<div class="loader">
+  <label>Auto-load status:</label>
+  <span id="autoStatus" style="font-family:var(--mono); font-size:11px; color:var(--text-faint);">checking for india_stock_signals.json…</span>
+  <button id="refreshNow" style="margin-left:8px;">Refresh now</button>
+</div>
+<div class="loader">
+  <label>Or load manually:</label>
+  <input type="file" id="fileInput" accept="application/json">
+  <span style="color:var(--text-faint); font-size:11px;">or paste JSON below</span>
+</div>
+<div style="margin-bottom:24px;">
+  <textarea id="pasteArea" placeholder="Paste the contents of india_stock_signals.json here"></textarea>
+  <div style="margin-top:8px;"><button id="loadPasted">Load pasted JSON</button></div>
+</div>
+
+<div class="filters">
+  <select id="capFilter">
+    <option value="all">All market caps</option>
+    <option value="small">Small cap</option>
+    <option value="mid">Mid cap</option>
+    <option value="large">Large cap</option>
+  </select>
+  <select id="recFilter">
+    <option value="all">All recommendations</option>
+    <option value="bullish">Bullish only</option>
+    <option value="bearish">Bearish only</option>
+    <option value="neutral">Neutral only</option>
+  </select>
+</div>
+
+<div class="metrics" id="metrics"></div>
+<table>
+  <thead>
+    <tr>
+      <th>Stock</th><th>Cap</th><th class="num">Price</th><th class="num">RSI</th>
+      <th>Trend</th><th>Candle pattern</th><th class="num">Composite</th>
+      <th class="num">Backtest win %</th><th>Recommendation</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+<div class="empty" id="emptyState" style="display:none;">No signals loaded. Load a JSON file from the Python model to see results.</div>
+
+<script>
+let currentData = null;
+
+function classify(rec){
+  if(rec.includes("bullish")) return "bullish";
+  if(rec.includes("bearish")) return "bearish";
+  return "neutral";
+}
+
+function render(){
+  const emptyEl = document.getElementById("emptyState");
+  const rowsEl = document.getElementById("rows");
+  const metricsEl = document.getElementById("metrics");
+  if(!currentData){
+    emptyEl.style.display = "block";
+    rowsEl.innerHTML = "";
+    metricsEl.innerHTML = "";
+    return;
+  }
+  emptyEl.style.display = "none";
+
+  document.getElementById("genTime").textContent =
+    "Model: " + currentData.model + "  |  Generated: " + new Date(currentData.generated_at).toLocaleString();
+
+  const capVal = document.getElementById("capFilter").value;
+  const recVal = document.getElementById("recFilter").value;
+
+  const filtered = currentData.results.filter(r=>{
+    const capOk = capVal === "all" || r.cap === capVal;
+    const recOk = recVal === "all" || classify(r.recommendation.toLowerCase()) === recVal;
+    return capOk && recOk;
+  });
+
+  const bullish = filtered.filter(r=>classify(r.recommendation.toLowerCase())==="bullish").length;
+  const bearish = filtered.filter(r=>classify(r.recommendation.toLowerCase())==="bearish").length;
+  const avgWinRate = filtered.filter(r=>r.backtest_win_rate_pct!=null);
+  const avgWin = avgWinRate.length
+    ? Math.round(avgWinRate.reduce((a,r)=>a+r.backtest_win_rate_pct,0)/avgWinRate.length)
+    : null;
+
+  metricsEl.innerHTML = `
+    <div class="metric"><div class="label">SIGNALS</div><div class="value">${filtered.length}</div></div>
+    <div class="metric"><div class="label">BULLISH</div><div class="value up">${bullish}</div></div>
+    <div class="metric"><div class="label">BEARISH</div><div class="value down">${bearish}</div></div>
+    <div class="metric"><div class="label">AVG BACKTEST WIN</div><div class="value">${avgWin!=null ? avgWin+"%" : "—"}</div></div>
+  `;
+
+  if(filtered.length === 0){
+    rowsEl.innerHTML = "";
+    emptyEl.style.display = "block";
+    emptyEl.textContent = "No results match this filter.";
+    return;
+  }
+
+  rowsEl.innerHTML = filtered.map(r=>{
+    const cls = classify(r.recommendation.toLowerCase());
+    const compositeCls = r.composite_score > 0 ? "up" : r.composite_score < 0 ? "down" : "neutral";
+    const trendCls = r.trend === "up" ? "up" : "down";
+    const capBadgeCls = r.cap === "small" ? "cap-small" : "";
+    return `
+    <tr>
+      <td><div class="name">${r.name}</div><div class="ticker">${r.ticker}</div></td>
+      <td><span class="badge ${capBadgeCls}">${r.cap}</span></td>
+      <td class="num">₹${r.price.toFixed(2)}</td>
+      <td class="num">${r.rsi != null ? r.rsi : "—"}</td>
+      <td class="${trendCls}">${r.trend === "up" ? "↑ up" : "↓ down"}</td>
+      <td>${r.candle_pattern ? r.candle_pattern : "—"}</td>
+      <td class="num ${compositeCls}">${r.composite_score > 0 ? "+" : ""}${r.composite_score}</td>
+      <td class="num">${r.backtest_win_rate_pct != null ? r.backtest_win_rate_pct + "%" : "—"}</td>
+      <td class="${cls}">${r.recommendation}</td>
+    </tr>`;
+  }).join("");
+}
+
+document.getElementById("fileInput").addEventListener("change", (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    try{
+      currentData = JSON.parse(ev.target.result);
+      render();
+    }catch(err){
+      alert("Could not parse that file as JSON: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById("loadPasted").addEventListener("click", ()=>{
+  const raw = document.getElementById("pasteArea").value.trim();
+  if(!raw) return;
+  try{
+    currentData = JSON.parse(raw);
+    render();
+  }catch(err){
+    alert("Could not parse pasted JSON: " + err.message);
+  }
+});
+
+document.getElementById("capFilter").addEventListener("change", render);
+document.getElementById("recFilter").addEventListener("change", render);
+
+const AUTO_FILE = "india_stock_signals.json";
+const POLL_MS = 5 * 60 * 1000; // re-check every 5 minutes
+const statusEl = document.getElementById("autoStatus");
+
+async function tryAutoLoad(showAlert){
+  if(location.protocol === "file:"){
+    statusEl.textContent = "auto-load needs a local server (see instructions) — use manual load below";
+    return;
+  }
+  try{
+    const res = await fetch(AUTO_FILE + "?t=" + Date.now(), {cache:"no-store"});
+    if(!res.ok) throw new Error("file not found at " + AUTO_FILE);
+    const data = await res.json();
+    currentData = data;
+    render();
+    statusEl.textContent = "loaded — last checked " + new Date().toLocaleTimeString();
+  }catch(err){
+    statusEl.textContent = "waiting for " + AUTO_FILE + " (" + err.message + ")";
+    if(showAlert) alert("Could not auto-load: " + err.message);
+  }
+}
+
+document.getElementById("refreshNow").addEventListener("click", ()=>tryAutoLoad(true));
+
+tryAutoLoad(false);
+setInterval(()=>tryAutoLoad(false), POLL_MS);
+
+render();
+</script>
+</body>
+</html>
