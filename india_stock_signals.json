@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T17:40:45.093623+00:00",
+  "generated_at": "2026-09-17T17:55:45.822112+00:00",
   "model": "Trend/momentum + global macro + news sentiment overlay",
   "strategy_file": "macro_news_overlay",
   "hold_period_days_for_backtest": 10,
