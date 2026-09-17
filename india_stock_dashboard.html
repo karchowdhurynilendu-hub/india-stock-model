@@ -303,15 +303,17 @@ document.getElementById("recFilter").addEventListener("change", render);
 
 // ---------- passive auto-load of the JSON file (works with no token) ----------
 async function tryAutoLoad(showAlert){
-  if(location.protocol === "file:") return;
+  if(location.protocol === "file:") return false;
   try{
     const res = await fetch(AUTO_FILE + "?t=" + Date.now(), {cache:"no-store"});
     if(!res.ok) throw new Error("file not found at " + AUTO_FILE);
     const data = await res.json();
     currentData = data;
     render();
+    return true;
   }catch(err){
     if(showAlert) alert("Could not load " + AUTO_FILE + ": " + err.message);
+    return false;
   }
 }
 
@@ -443,6 +445,21 @@ async function waitForRunToFinish(cfg, sinceTime){
   throw new Error("Timed out waiting for the run to finish — check the Actions tab, it may still be going.");
 }
 
+async function waitForFreshData(sinceTime){
+  setStatus("Run succeeded — waiting for GitHub Pages to publish the new file...");
+  for(let i = 0; i < 15; i++){
+    const ok = await tryAutoLoad(false);
+    if(ok && currentData && currentData.generated_at){
+      const genTime = new Date(currentData.generated_at).getTime();
+      if(genTime >= sinceTime - 60000){ // allow a little clock slack
+        return true;
+      }
+    }
+    await new Promise(r=>setTimeout(r, 6000));
+  }
+  return false;
+}
+
 // ---------- the main "Apply strategy & refresh" action ----------
 async function applyAndRun(){
   const cfg = getConnCfg();
@@ -459,9 +476,12 @@ async function applyAndRun(){
     const since = Date.now();
     await triggerWorkflow(cfg);
     await waitForRunToFinish(cfg, since);
-    setStatus("Scan complete — loading fresh results...");
-    await tryAutoLoad(false);
-    setStatus("Up to date — last run " + new Date().toLocaleTimeString(), "ok");
+    const gotFresh = await waitForFreshData(since);
+    if(gotFresh){
+      setStatus("Up to date — last run " + new Date().toLocaleTimeString(), "ok");
+    }else{
+      setStatus("Workflow succeeded, but the live page hasn't picked up the new file yet (GitHub Pages can lag up to a couple minutes). Click 'Refresh (reload existing data)' again shortly.", "error");
+    }
   }catch(err){
     setStatus("Error: " + err.message, "error");
   }finally{
