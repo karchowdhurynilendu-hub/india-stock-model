@@ -21,15 +21,23 @@
     margin:0 0 4px; color:var(--text);
   }
   .subhead{
-    font-family:var(--mono); font-size:12px; color:var(--text-faint); margin:0 0 28px;
+    font-family:var(--mono); font-size:12px; color:var(--text-faint); margin:0 0 20px;
   }
-  .loader{
-    display:flex; gap:12px; align-items:center; margin-bottom:28px;
+  .panel{
     border:1px solid var(--border); background:var(--panel);
-    padding:14px 16px; border-radius:4px; flex-wrap:wrap;
+    padding:14px 16px; border-radius:4px; margin-bottom:16px;
   }
-  .loader label{
-    font-size:12px; color:var(--text-dim); font-family:var(--mono);
+  .panel-title{
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.05em; margin:0 0 10px;
+  }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+  .row:last-child{ margin-bottom:0; }
+  label{ font-size:12px; color:var(--text-dim); font-family:var(--mono); }
+  input[type=text], input[type=password]{
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:6px 10px; font-size:12px; font-family:var(--mono);
+    min-width:160px;
   }
   input[type=file]{
     font-family:var(--sans); font-size:12px; color:var(--text-dim);
@@ -44,7 +52,9 @@
     border-radius:4px; padding:7px 14px; font-size:12px; cursor:pointer;
     font-family:var(--sans);
   }
-  button:hover{border-color:var(--text-dim);}
+  button:hover:not(:disabled){ border-color:var(--text-dim); }
+  button:disabled{ opacity:0.5; cursor:not-allowed; }
+  button.primary{ background:var(--accent); color:#1a1408; border-color:var(--accent); font-weight:600; }
   .filters{
     display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
   }
@@ -81,6 +91,11 @@
   }
   .cap-small{ color:var(--accent); border-color:var(--accent); }
   .empty{ padding:40px 0; text-align:center; color:var(--text-faint); font-size:13px; }
+  .status-line{ font-family:var(--mono); font-size:11px; color:var(--text-faint); }
+  .status-line.error{ color:var(--down); }
+  .status-line.ok{ color:var(--up); }
+  .security-note{ font-size:11px; color:var(--text-faint); margin-top:8px; line-height:1.5; }
+  details summary{ cursor:pointer; font-size:12px; color:var(--text-dim); font-family:var(--mono); }
 </style>
 </head>
 <body>
@@ -88,19 +103,45 @@
 <h1>India equities signal dashboard</h1>
 <p class="subhead" id="genTime">No data loaded yet</p>
 
-<div class="loader">
-  <label>Auto-load status:</label>
-  <span id="autoStatus" style="font-family:var(--mono); font-size:11px; color:var(--text-faint);">checking for india_stock_signals.json…</span>
-  <button id="refreshNow" style="margin-left:8px;">Refresh now</button>
+<div class="panel">
+  <p class="panel-title">Strategy &amp; live run</p>
+  <div class="row">
+    <label>Strategy:</label>
+    <select id="strategySelect"><option value="">loading list…</option></select>
+    <button id="applyRunBtn" class="primary">Apply strategy &amp; refresh</button>
+    <button id="refreshOnlyBtn">Refresh (reload existing data)</button>
+  </div>
+  <div class="row"><span class="status-line" id="ghStatus">Not connected — add repo details below to enable live runs.</span></div>
+
+  <details style="margin-top:10px;">
+    <summary>GitHub connection settings</summary>
+    <div style="margin-top:10px;">
+      <div class="row">
+        <label>Owner:</label><input type="text" id="ghOwner" value="karchowdhurynilendu-hub">
+        <label>Repo:</label><input type="text" id="ghRepo" value="india-stock-model">
+        <label>Branch:</label><input type="text" id="ghBranch" value="main">
+      </div>
+      <div class="row">
+        <label>Personal access token:</label>
+        <input type="password" id="ghToken" placeholder="paste token here (kept in this browser only)">
+        <label><input type="checkbox" id="rememberToken"> remember on this device</label>
+        <button id="saveConnBtn">Save</button>
+      </div>
+      <p class="security-note">
+        This token is used only for direct calls from your browser to api.github.com — it is never sent anywhere else, including to me. Use a <b>fine-grained personal access token</b> scoped to only this one repository, with "Contents: Read and write" and "Actions: Read and write" permissions and nothing else. Without a token, the dropdown and buttons still work for viewing — "Apply strategy & refresh" just won't be able to trigger a live run.
+      </p>
+    </div>
+  </details>
 </div>
-<div class="loader">
-  <label>Or load manually:</label>
-  <input type="file" id="fileInput" accept="application/json">
-  <span style="color:var(--text-faint); font-size:11px;">or paste JSON below</span>
-</div>
-<div style="margin-bottom:24px;">
+
+<div class="panel">
+  <p class="panel-title">Manual data load (no GitHub connection needed)</p>
+  <div class="row">
+    <input type="file" id="fileInput" accept="application/json">
+    <span style="color:var(--text-faint); font-size:11px;">or paste JSON below</span>
+  </div>
   <textarea id="pasteArea" placeholder="Paste the contents of india_stock_signals.json here"></textarea>
-  <div style="margin-top:8px;"><button id="loadPasted">Load pasted JSON</button></div>
+  <div class="row" style="margin-top:8px;"><button id="loadPasted">Load pasted JSON</button></div>
 </div>
 
 <div class="filters">
@@ -133,6 +174,15 @@
 
 <script>
 let currentData = null;
+const GITHUB_API = "https://api.github.com";
+const WORKFLOW_FILE = "daily-scan.yml";
+const AUTO_FILE = "india_stock_signals.json";
+const POLL_MS = 5 * 60 * 1000; // passive re-check every 5 minutes
+const KNOWN_STRATEGY_FALLBACK = ["trend_momentum_volume", "macd_crossover", "momentum_breakout", "macro_news_overlay"];
+
+// ---------- helpers ----------
+function b64EncodeUnicode(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUnicode(str){ return decodeURIComponent(escape(atob(str))); }
 
 function classify(rec){
   if(rec.includes("bullish")) return "bullish";
@@ -140,6 +190,22 @@ function classify(rec){
   return "neutral";
 }
 
+function getConnCfg(){
+  return {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim(),
+  };
+}
+
+function setStatus(msg, kind){
+  const el = document.getElementById("ghStatus");
+  el.textContent = msg;
+  el.className = "status-line" + (kind ? " " + kind : "");
+}
+
+// ---------- rendering (unchanged data-display logic) ----------
 function render(){
   const emptyEl = document.getElementById("emptyState");
   const rowsEl = document.getElementById("rows");
@@ -205,6 +271,7 @@ function render(){
   }).join("");
 }
 
+// ---------- manual load (file / paste) ----------
 document.getElementById("fileInput").addEventListener("change", (e)=>{
   const file = e.target.files[0];
   if(!file) return;
@@ -234,33 +301,181 @@ document.getElementById("loadPasted").addEventListener("click", ()=>{
 document.getElementById("capFilter").addEventListener("change", render);
 document.getElementById("recFilter").addEventListener("change", render);
 
-const AUTO_FILE = "india_stock_signals.json";
-const POLL_MS = 5 * 60 * 1000; // re-check every 5 minutes
-const statusEl = document.getElementById("autoStatus");
-
+// ---------- passive auto-load of the JSON file (works with no token) ----------
 async function tryAutoLoad(showAlert){
-  if(location.protocol === "file:"){
-    statusEl.textContent = "auto-load needs a local server (see instructions) — use manual load below";
-    return;
-  }
+  if(location.protocol === "file:") return;
   try{
     const res = await fetch(AUTO_FILE + "?t=" + Date.now(), {cache:"no-store"});
     if(!res.ok) throw new Error("file not found at " + AUTO_FILE);
     const data = await res.json();
     currentData = data;
     render();
-    statusEl.textContent = "loaded — last checked " + new Date().toLocaleTimeString();
   }catch(err){
-    statusEl.textContent = "waiting for " + AUTO_FILE + " (" + err.message + ")";
-    if(showAlert) alert("Could not auto-load: " + err.message);
+    if(showAlert) alert("Could not load " + AUTO_FILE + ": " + err.message);
   }
 }
 
-document.getElementById("refreshNow").addEventListener("click", ()=>tryAutoLoad(true));
+document.getElementById("refreshOnlyBtn").addEventListener("click", ()=>tryAutoLoad(true));
 
+// ---------- GitHub connection persistence ----------
+function loadSavedConnection(){
+  try{
+    const saved = JSON.parse(localStorage.getItem("indiaStockDashConn") || "null");
+    if(saved){
+      document.getElementById("ghOwner").value = saved.owner || document.getElementById("ghOwner").value;
+      document.getElementById("ghRepo").value = saved.repo || document.getElementById("ghRepo").value;
+      document.getElementById("ghBranch").value = saved.branch || "main";
+      if(saved.token){
+        document.getElementById("ghToken").value = saved.token;
+        document.getElementById("rememberToken").checked = true;
+      }
+    }
+  }catch(e){ /* ignore corrupt storage */ }
+}
+
+document.getElementById("saveConnBtn").addEventListener("click", ()=>{
+  const cfg = getConnCfg();
+  if(document.getElementById("rememberToken").checked){
+    localStorage.setItem("indiaStockDashConn", JSON.stringify(cfg));
+    setStatus("Connection settings saved in this browser.", "ok");
+  }else{
+    localStorage.removeItem("indiaStockDashConn");
+    localStorage.setItem("indiaStockDashConn", JSON.stringify({...cfg, token:""}));
+    setStatus("Connection settings saved (token not remembered — re-enter it next visit).", "ok");
+  }
+  populateStrategyDropdown();
+});
+
+// ---------- strategy dropdown, populated from the repo's strategies/ folder ----------
+async function populateStrategyDropdown(){
+  const cfg = getConnCfg();
+  const select = document.getElementById("strategySelect");
+  let names = KNOWN_STRATEGY_FALLBACK;
+  if(cfg.owner && cfg.repo){
+    try{
+      const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/strategies?ref=${cfg.branch}`);
+      if(res.ok){
+        const files = await res.json();
+        const found = files.filter(f=>f.name.endsWith(".py")).map(f=>f.name.replace(/\.py$/, ""));
+        if(found.length) names = found;
+      }
+    }catch(e){ /* fall back to known list */ }
+  }
+  select.innerHTML = names.map(n=>`<option value="${n}">${n}</option>`).join("");
+
+  // try to pre-select whichever strategy is currently active, from the loaded JSON's strategy_file if present
+  if(currentData && currentData.strategy_file && names.includes(currentData.strategy_file)){
+    select.value = currentData.strategy_file;
+  }
+}
+
+// ---------- GitHub API: read/update the strategy file ----------
+async function getModelFile(cfg){
+  const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/india_stock_model.py?ref=${cfg.branch}`, {
+    headers: cfg.token ? {Authorization: `Bearer ${cfg.token}`} : {}
+  });
+  if(!res.ok) throw new Error("Could not read india_stock_model.py (HTTP " + res.status + ")");
+  const data = await res.json();
+  const content = b64DecodeUnicode(data.content.replace(/\n/g, ""));
+  return {content, sha: data.sha};
+}
+
+async function setStrategyOnGitHub(cfg, newStrategy){
+  setStatus("Checking current strategy setting...");
+  const {content, sha} = await getModelFile(cfg);
+  const re = /STRATEGY\s*=\s*"[^"]*"/;
+  if(!re.test(content)) throw new Error("Could not find the STRATEGY line in india_stock_model.py");
+  const desired = `STRATEGY = "${newStrategy}"`;
+  if(content.match(re)[0] === desired){
+    return false; // already set — nothing to commit
+  }
+  const updated = content.replace(re, desired);
+  setStatus(`Updating strategy to "${newStrategy}"...`);
+  const putRes = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/india_stock_model.py`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${cfg.token}`,
+      Accept: "application/vnd.github+json",
+    },
+    body: JSON.stringify({
+      message: `Switch strategy to ${newStrategy} (via dashboard)`,
+      content: b64EncodeUnicode(updated),
+      sha: sha,
+      branch: cfg.branch,
+    }),
+  });
+  if(!putRes.ok) throw new Error("Failed to update strategy file (HTTP " + putRes.status + "). Check your token's permissions.");
+  return true;
+}
+
+// ---------- GitHub API: trigger and wait for a workflow run ----------
+async function triggerWorkflow(cfg){
+  setStatus("Triggering a fresh scan on GitHub...");
+  const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${cfg.token}`,
+      Accept: "application/vnd.github+json",
+    },
+    body: JSON.stringify({ref: cfg.branch}),
+  });
+  if(!res.ok) throw new Error("Failed to trigger the workflow (HTTP " + res.status + "). Check your token's Actions permission.");
+}
+
+async function waitForRunToFinish(cfg, sinceTime){
+  setStatus("Waiting for the scan to finish (usually 30–90 seconds)...");
+  for(let i = 0; i < 40; i++){
+    await new Promise(r=>setTimeout(r, 6000));
+    const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5`, {
+      headers: cfg.token ? {Authorization: `Bearer ${cfg.token}`} : {},
+    });
+    if(!res.ok) continue;
+    const data = await res.json();
+    const run = data.workflow_runs.find(r => new Date(r.created_at).getTime() >= sinceTime - 5000);
+    if(run){
+      setStatus(`Run status: ${run.status}${run.conclusion ? " (" + run.conclusion + ")" : ""}...`);
+      if(run.status === "completed"){
+        if(run.conclusion === "success") return;
+        throw new Error("The workflow run finished with status: " + run.conclusion + ". Check the Actions tab for the error log.");
+      }
+    }
+  }
+  throw new Error("Timed out waiting for the run to finish — check the Actions tab, it may still be going.");
+}
+
+// ---------- the main "Apply strategy & refresh" action ----------
+async function applyAndRun(){
+  const cfg = getConnCfg();
+  const btn = document.getElementById("applyRunBtn");
+  if(!cfg.token){
+    setStatus("No token entered — just reloading existing data. Add a token above to trigger live runs.", "error");
+    await tryAutoLoad(true);
+    return;
+  }
+  btn.disabled = true;
+  try{
+    const chosen = document.getElementById("strategySelect").value;
+    if(chosen) await setStrategyOnGitHub(cfg, chosen);
+    const since = Date.now();
+    await triggerWorkflow(cfg);
+    await waitForRunToFinish(cfg, since);
+    setStatus("Scan complete — loading fresh results...");
+    await tryAutoLoad(false);
+    setStatus("Up to date — last run " + new Date().toLocaleTimeString(), "ok");
+  }catch(err){
+    setStatus("Error: " + err.message, "error");
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+document.getElementById("applyRunBtn").addEventListener("click", applyAndRun);
+
+// ---------- init ----------
+loadSavedConnection();
+populateStrategyDropdown();
 tryAutoLoad(false);
 setInterval(()=>tryAutoLoad(false), POLL_MS);
-
 render();
 </script>
 </body>
