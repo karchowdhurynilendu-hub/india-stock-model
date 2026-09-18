@@ -37,7 +37,7 @@ TO ADD YOUR OWN STRATEGY:
 
         STRATEGY_LABEL = "Your strategy's display name"
 
-    Then set STRATEGY = "macro_news_overlay" below. No other code needs to
+    Then set STRATEGY = "macd_crossover" below. No other code needs to
     change — the backtest and output format are generic and work with
     any strategy that produces a 'composite' column.
 
