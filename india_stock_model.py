@@ -37,7 +37,7 @@ TO ADD YOUR OWN STRATEGY:
 
         STRATEGY_LABEL = "Your strategy's display name"
 
-    Then set STRATEGY = "trend_momentum_volume" below. No other code needs to
+    Then set STRATEGY = "momentum_breakout" below. No other code needs to
     change — the backtest and output format are generic and work with
     any strategy that produces a 'composite' column.
 
