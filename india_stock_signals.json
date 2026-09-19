@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T06:15:15.328804+00:00",
+  "generated_at": "2026-09-19T06:20:43.286063+00:00",
   "model": "Trend + momentum (RSI) + volume confirmation",
   "strategy_file": "trend_momentum_volume",
   "hold_period_days_for_backtest": 10,
