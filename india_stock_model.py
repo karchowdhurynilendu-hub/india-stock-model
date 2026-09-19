@@ -1,225 +1,503 @@
-"""
-India Equities Signal Model — pluggable strategy runner
-----------------------------------------------------------
-Fetches daily OHLCV data for a universe of NSE-listed stocks, hands it to
-whichever strategy is selected below, backtests that strategy's signal,
-and writes today's ranked recommendations to a JSON file for the
-dashboard to read.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>India equities signal dashboard</title>
+<style>
+  :root{
+    --bg:#0c0e11; --panel:#14171c; --panel-2:#191d23; --border:#2a2e35;
+    --text:#e7e4da; --text-dim:#8b909a; --text-faint:#5c6169;
+    --up:#3fbf7f; --down:#e5484d; --accent:#d9a441;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); padding:32px 40px 80px;
+  }
+  h1{
+    font-size:15px; font-weight:600; letter-spacing:0.02em;
+    margin:0 0 4px; color:var(--text);
+  }
+  .subhead{
+    font-family:var(--mono); font-size:12px; color:var(--text-faint); margin:0 0 20px;
+  }
+  .panel{
+    border:1px solid var(--border); background:var(--panel);
+    padding:14px 16px; border-radius:4px; margin-bottom:16px;
+  }
+  .panel-title{
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.05em; margin:0 0 10px;
+  }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+  .row:last-child{ margin-bottom:0; }
+  label{ font-size:12px; color:var(--text-dim); font-family:var(--mono); }
+  input[type=text], input[type=password]{
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:6px 10px; font-size:12px; font-family:var(--mono);
+    min-width:160px;
+  }
+  input[type=file]{
+    font-family:var(--sans); font-size:12px; color:var(--text-dim);
+  }
+  textarea{
+    width:100%; min-height:70px; background:var(--panel-2); color:var(--text);
+    border:1px solid var(--border); border-radius:4px; padding:8px;
+    font-family:var(--mono); font-size:11px; resize:vertical;
+  }
+  button{
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:7px 14px; font-size:12px; cursor:pointer;
+    font-family:var(--sans);
+  }
+  button:hover:not(:disabled){ border-color:var(--text-dim); }
+  button:disabled{ opacity:0.5; cursor:not-allowed; }
+  button.primary{ background:var(--accent); color:#1a1408; border-color:var(--accent); font-weight:600; }
+  .filters{
+    display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  select{
+    background:var(--panel); color:var(--text); border:1px solid var(--border);
+    border-radius:4px; padding:6px 10px; font-size:12px; font-family:var(--sans);
+  }
+  .metrics{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border);
+    margin-bottom:28px; border-radius:4px; overflow:hidden;
+  }
+  .metric{ background:var(--panel); padding:14px 16px; }
+  .metric .label{ font-size:11px; color:var(--text-faint); font-family:var(--mono); margin-bottom:6px;}
+  .metric .value{ font-size:22px; font-weight:600; font-family:var(--mono);}
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  thead th{
+    text-align:left; font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    font-weight:400; padding:8px 12px; border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:10px 12px; border-bottom:1px solid var(--border); font-family:var(--sans);
+  }
+  tbody tr:hover{ background:var(--panel); }
+  .num{ font-family:var(--mono); text-align:right; }
+  .ticker{ font-family:var(--mono); color:var(--text-dim); font-size:11px; }
+  .name{ font-weight:500; }
+  .up{ color:var(--up); }
+  .down{ color:var(--down); }
+  .neutral{ color:var(--text-dim); }
+  .badge{
+    display:inline-block; padding:3px 9px; border-radius:3px; font-size:11px;
+    font-family:var(--mono); border:1px solid var(--border);
+  }
+  .cap-small{ color:var(--accent); border-color:var(--accent); }
+  .empty{ padding:40px 0; text-align:center; color:var(--text-faint); font-size:13px; }
+  .status-line{ font-family:var(--mono); font-size:11px; color:var(--text-faint); }
+  .status-line.error{ color:var(--down); }
+  .status-line.ok{ color:var(--up); }
+  .security-note{ font-size:11px; color:var(--text-faint); margin-top:8px; line-height:1.5; }
+  details summary{ cursor:pointer; font-size:12px; color:var(--text-dim); font-family:var(--mono); }
+</style>
+</head>
+<body>
 
-TO SWITCH STRATEGIES:
-    Change the STRATEGY variable below to the filename (without .py) of
-    any module in the strategies/ folder. Four are included:
-        "trend_momentum_volume"  (default — trend + RSI + volume)
-        "macd_crossover"         (MACD line/signal crossover + volume)
-        "momentum_breakout"      (aggressive early-momentum / breakout watchlist)
-        "macro_news_overlay"     (trend/momentum + global macro + news sentiment)
+<h1>India equities signal dashboard</h1>
+<p class="subhead" id="genTime">No data loaded yet</p>
 
-TO ADD YOUR OWN STRATEGY:
-    Create a new file in strategies/, e.g. strategies/my_strategy.py,
-    implementing this contract:
+<div class="panel">
+  <p class="panel-title">Strategy &amp; live run</p>
+  <div class="row">
+    <label>Strategy:</label>
+    <select id="strategySelect"><option value="">loading list…</option></select>
+    <button id="applyRunBtn" class="primary">Apply strategy &amp; refresh</button>
+    <button id="refreshOnlyBtn">Refresh (reload existing data)</button>
+  </div>
+  <div class="row"><span class="status-line" id="ghStatus">Not connected — add repo details below to enable live runs.</span></div>
 
-        build_signal(df) -> df
-            Takes a pandas DataFrame with columns Open, High, Low, Close,
-            Volume (daily bars, oldest first). Must return that same
-            DataFrame with an added 'composite' column: a float score
-            where positive = bullish lean, negative = bearish lean,
-            magnitude = conviction. You can add any other columns you
-            want (e.g. your own indicator values).
+  <details style="margin-top:10px;">
+    <summary>GitHub connection settings</summary>
+    <div style="margin-top:10px;">
+      <div class="row">
+        <label>Owner:</label><input type="text" id="ghOwner" value="karchowdhurynilendu-hub">
+        <label>Repo:</label><input type="text" id="ghRepo" value="india-stock-model">
+        <label>Branch:</label><input type="text" id="ghBranch" value="main">
+      </div>
+      <div class="row">
+        <label>Personal access token:</label>
+        <input type="password" id="ghToken" placeholder="paste token here (kept in this browser only)">
+        <label><input type="checkbox" id="rememberToken"> remember on this device</label>
+        <button id="saveConnBtn">Save</button>
+      </div>
+      <p class="security-note">
+        This token is used only for direct calls from your browser to api.github.com — it is never sent anywhere else, including to me. Use a <b>fine-grained personal access token</b> scoped to only this one repository, with "Contents: Read and write" and "Actions: Read and write" permissions and nothing else. Without a token, the dropdown and buttons still work for viewing — "Apply strategy & refresh" just won't be able to trigger a live run.
+      </p>
+    </div>
+  </details>
+</div>
 
-        label_recommendation(composite_value) -> str
-            Takes the latest composite score and returns a short label,
-            e.g. "Strong watch (bullish)".
+<div class="panel">
+  <p class="panel-title">Manual data load (no GitHub connection needed)</p>
+  <div class="row">
+    <input type="file" id="fileInput" accept="application/json">
+    <span style="color:var(--text-faint); font-size:11px;">or paste JSON below</span>
+  </div>
+  <textarea id="pasteArea" placeholder="Paste the contents of india_stock_signals.json here"></textarea>
+  <div class="row" style="margin-top:8px;"><button id="loadPasted">Load pasted JSON</button></div>
+</div>
 
-    Optional:
-        detect_pattern(row) -> (name, bias) or None
-            Row is the latest bar. Return a (pattern_name, bias) tuple
-            or None. Shown as an informational tag only.
+<div class="filters">
+  <select id="capFilter">
+    <option value="all">All market caps</option>
+    <option value="small">Small cap</option>
+    <option value="mid">Mid cap</option>
+    <option value="large">Large cap</option>
+  </select>
+  <select id="recFilter">
+    <option value="all">All recommendations</option>
+    <option value="bullish">Bullish only</option>
+    <option value="bearish">Bearish only</option>
+    <option value="neutral">Neutral only</option>
+  </select>
+</div>
 
-        STRATEGY_LABEL = "Your strategy's display name"
+<div class="metrics" id="metrics"></div>
+<table>
+  <thead>
+    <tr>
+      <th>Stock</th><th>Cap</th><th class="num">Price</th><th class="num">RSI</th>
+      <th>Trend</th><th>Candle pattern</th><th class="num">Composite</th>
+      <th class="num">Backtest win %</th><th>Recommendation</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+<div class="empty" id="emptyState" style="display:none;">No signals loaded. Load a JSON file from the Python model to see results.</div>
 
-    Then set STRATEGY = "momentum_breakout" below. No other code needs to
-    change — the backtest and output format are generic and work with
-    any strategy that produces a 'composite' column.
+<script>
+let currentData = null;
+const GITHUB_API = "https://api.github.com";
+const WORKFLOW_FILE = "daily-scan.yml";
+const AUTO_FILE = "india_stock_signals.json";
+const POLL_MS = 5 * 60 * 1000; // passive re-check every 5 minutes
+const KNOWN_STRATEGY_FALLBACK = ["trend_momentum_volume", "macd_crossover", "momentum_breakout", "macro_news_overlay"];
 
-Requires: pip install yfinance pandas numpy
-"""
+// ---------- helpers ----------
+function b64EncodeUnicode(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUnicode(str){ return decodeURIComponent(escape(atob(str))); }
 
-import importlib
-import json
-import os
-import sys
-import time
-from datetime import datetime, timezone
+function classify(rec){
+  if(rec.includes("bullish")) return "bullish";
+  if(rec.includes("bearish")) return "bearish";
+  return "neutral";
+}
 
-import numpy as np
-import pandas as pd
-import yfinance as yf
+function getConnCfg(){
+  return {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim(),
+  };
+}
 
-# ---------------------------------------------------------------------------
-# Config — this is what you edit day to day
-# ---------------------------------------------------------------------------
-STRATEGY = "trend_momentum_volume"   # <-- change this to switch strategies
+function setStatus(msg, kind){
+  const el = document.getElementById("ghStatus");
+  el.textContent = msg;
+  el.className = "status-line" + (kind ? " " + kind : "");
+}
 
-UNIVERSE = [
-    {"ticker": "ZENSARTECH.NS", "name": "Zensar Tech", "cap": "mid"},
-    {"ticker": "KEI.NS", "name": "KEI Industries", "cap": "mid"},
-    {"ticker": "SONATSOFTW.NS", "name": "Sonata Software", "cap": "small"},
-    {"ticker": "APTUS.NS", "name": "Aptus Value Housing", "cap": "small"},
-    {"ticker": "REDINGTON.NS", "name": "Redington", "cap": "mid"},
-    {"ticker": "ANURAS.NS", "name": "Anupam Rasayan", "cap": "small"},
-    {"ticker": "CRAFTSMAN.NS", "name": "Craftsman Automation", "cap": "mid"},
-    {"ticker": "GRAVITA.NS", "name": "Gravita India", "cap": "small"},
-    {"ticker": "HBLENGINE.NS", "name": "HBL Engineering (formerly HBL Power)", "cap": "small"},
-    {"ticker": "COHANCE.NS", "name": "Cohance Lifesciences (formerly Suven Pharma)", "cap": "small"},
-    {"ticker": "RAINBOW.NS", "name": "Rainbow Childrens Hosp", "cap": "small"},
-    {"ticker": "TCIEXP.NS", "name": "TCI Express", "cap": "mid"},
-    {"ticker": "RELIANCE.NS", "name": "Reliance Industries", "cap": "large"},
-    {"ticker": "HDFCBANK.NS", "name": "HDFC Bank", "cap": "large"},
-]
+// ---------- rendering (unchanged data-display logic) ----------
+function render(){
+  const emptyEl = document.getElementById("emptyState");
+  const rowsEl = document.getElementById("rows");
+  const metricsEl = document.getElementById("metrics");
+  if(!currentData){
+    emptyEl.style.display = "block";
+    rowsEl.innerHTML = "";
+    metricsEl.innerHTML = "";
+    return;
+  }
+  emptyEl.style.display = "none";
 
-LOOKBACK_DAYS = "1y"
-BACKTEST_HOLD_DAYS = 10
-BACKTEST_THRESHOLD = 1.0   # |composite| at or above this counts as a signal in the backtest
+  document.getElementById("genTime").textContent =
+    "Model: " + currentData.model + "  |  Generated: " + new Date(currentData.generated_at).toLocaleString();
 
+  const capVal = document.getElementById("capFilter").value;
+  const recVal = document.getElementById("recFilter").value;
 
-# ---------------------------------------------------------------------------
-# Strategy loading — generic, doesn't need to change when you add strategies
-# ---------------------------------------------------------------------------
-def load_strategy(name):
-    strategies_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "strategies")
-    if strategies_dir not in sys.path:
-        sys.path.insert(0, strategies_dir)
-    module = importlib.import_module(name)
-    for required in ("build_signal", "label_recommendation"):
-        if not hasattr(module, required):
-            raise ImportError(
-                f"Strategy '{name}' is missing required function: {required}(). "
-                f"See the contract described at the top of india_stock_model.py."
-            )
-    return module
+  const filtered = currentData.results.filter(r=>{
+    const capOk = capVal === "all" || r.cap === capVal;
+    const recOk = recVal === "all" || classify(r.recommendation.toLowerCase()) === recVal;
+    return capOk && recOk;
+  });
 
+  const bullish = filtered.filter(r=>classify(r.recommendation.toLowerCase())==="bullish").length;
+  const bearish = filtered.filter(r=>classify(r.recommendation.toLowerCase())==="bearish").length;
+  const avgWinRate = filtered.filter(r=>r.backtest_win_rate_pct!=null);
+  const avgWin = avgWinRate.length
+    ? Math.round(avgWinRate.reduce((a,r)=>a+r.backtest_win_rate_pct,0)/avgWinRate.length)
+    : null;
 
-# ---------------------------------------------------------------------------
-# Generic backtest — works against any strategy's 'composite' column
-# ---------------------------------------------------------------------------
-def backtest(df, threshold=BACKTEST_THRESHOLD):
-    signals = df[df["composite"].abs() >= threshold].copy()
-    outcomes = []
-    for idx in signals.index:
-        pos = df.index.get_loc(idx)
-        if pos + BACKTEST_HOLD_DAYS >= len(df):
-            continue
-        entry_price = df["Close"].iloc[pos]
-        exit_price = df["Close"].iloc[pos + BACKTEST_HOLD_DAYS]
-        fwd_return = (exit_price - entry_price) / entry_price
-        direction = 1 if df["composite"].iloc[pos] > 0 else -1
-        correct = (fwd_return > 0 and direction > 0) or (fwd_return < 0 and direction < 0)
-        outcomes.append(correct)
-    if not outcomes:
-        return None
-    return round(100 * sum(outcomes) / len(outcomes), 1)
+  metricsEl.innerHTML = `
+    <div class="metric"><div class="label">SIGNALS</div><div class="value">${filtered.length}</div></div>
+    <div class="metric"><div class="label">BULLISH</div><div class="value up">${bullish}</div></div>
+    <div class="metric"><div class="label">BEARISH</div><div class="value down">${bearish}</div></div>
+    <div class="metric"><div class="label">AVG BACKTEST WIN</div><div class="value">${avgWin!=null ? avgWin+"%" : "—"}</div></div>
+  `;
 
+  if(filtered.length === 0){
+    rowsEl.innerHTML = "";
+    emptyEl.style.display = "block";
+    emptyEl.textContent = "No results match this filter.";
+    return;
+  }
 
-def _sanitize_for_json(obj):
-    """Recursively replace NaN/Infinity floats with None so the output is
-    always valid JSON — Python's json module writes bare NaN/Infinity by
-    default, which is NOT valid JSON and breaks browser JSON.parse()."""
-    if isinstance(obj, float):
-        if np.isnan(obj) or np.isinf(obj):
-            return None
-        return obj
-    if isinstance(obj, dict):
-        return {k: _sanitize_for_json(v) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [_sanitize_for_json(v) for v in obj]
-    return obj
+  rowsEl.innerHTML = filtered.map(r=>{
+    const cls = classify(r.recommendation.toLowerCase());
+    const compositeCls = r.composite_score > 0 ? "up" : r.composite_score < 0 ? "down" : "neutral";
+    const trendCls = r.trend === "up" ? "up" : "down";
+    const capBadgeCls = r.cap === "small" ? "cap-small" : "";
+    return `
+    <tr>
+      <td><div class="name">${r.name}</div><div class="ticker">${r.ticker}</div></td>
+      <td><span class="badge ${capBadgeCls}">${r.cap}</span></td>
+      <td class="num">${r.price != null ? "₹" + r.price.toFixed(2) : "—"}</td>
+      <td class="num">${r.rsi != null ? r.rsi : "—"}</td>
+      <td class="${trendCls}">${r.trend === "up" ? "↑ up" : "↓ down"}</td>
+      <td>${r.candle_pattern ? r.candle_pattern : "—"}</td>
+      <td class="num ${compositeCls}">${r.composite_score != null ? (r.composite_score > 0 ? "+" : "") + r.composite_score : "—"}</td>
+      <td class="num">${r.backtest_win_rate_pct != null ? r.backtest_win_rate_pct + "%" : "—"}</td>
+      <td class="${cls}">${r.recommendation}</td>
+    </tr>`;
+  }).join("");
+}
 
-
-# ---------------------------------------------------------------------------
-# Run the scan
-# ---------------------------------------------------------------------------
-def run_scan():
-    strategy = load_strategy(STRATEGY)
-    strategy_label = getattr(strategy, "STRATEGY_LABEL", STRATEGY)
-    results = []
-
-    for stock in UNIVERSE:
-        try:
-            hist = yf.download(
-                stock["ticker"], period=LOOKBACK_DAYS, interval="1d",
-                auto_adjust=True, progress=False,
-            )
-            # Newer yfinance versions return two-level ("MultiIndex") columns
-            # even for a single ticker, which breaks comparisons like
-            # SMA20 > SMA50 with "Operands are not aligned". Flatten it.
-            if isinstance(hist.columns, pd.MultiIndex):
-                hist.columns = hist.columns.get_level_values(0)
-            if hist.empty or len(hist) < 60 or pd.isna(hist["Close"].iloc[-1]):
-                continue
-
-            hist = strategy.build_signal(hist)
-            if "composite" not in hist.columns:
-                raise ValueError("strategy.build_signal() did not add a 'composite' column")
-
-            latest = hist.iloc[-1]
-            pattern = strategy.detect_pattern(latest) if hasattr(strategy, "detect_pattern") else None
-            win_rate = backtest(hist)
-
-            # Generic pass-through: any column a strategy names with a
-            # "_display" suffix is surfaced in the output automatically,
-            # under its name with that suffix stripped. This lets new
-            # strategies add their own fields (e.g. macro_tailwind,
-            # roc_20d_pct) without any changes needed here.
-            extra_fields = {}
-            for col in hist.columns:
-                if col.endswith("_display"):
-                    val = latest[col]
-                    key = col[: -len("_display")]
-                    if isinstance(val, (float, np.floating)) and pd.isna(val):
-                        extra_fields[key] = None
-                    elif isinstance(val, (np.bool_,)):
-                        extra_fields[key] = bool(val)
-                    elif isinstance(val, (np.integer, np.floating)):
-                        extra_fields[key] = round(float(val), 2)
-                    else:
-                        extra_fields[key] = val
-
-            result = {
-                "ticker": stock["ticker"],
-                "name": stock["name"],
-                "cap": stock["cap"],
-                "price": round(float(latest["Close"]), 2),
-                "composite_score": round(float(latest["composite"]), 2),
-                "recommendation": strategy.label_recommendation(latest["composite"]),
-                "candle_pattern": pattern[0] if pattern else None,
-                "candle_bias": pattern[1] if pattern else None,
-                "backtest_win_rate_pct": win_rate,
-            }
-            result.update(extra_fields)
-            results.append(result)
-            time.sleep(0.3)  # be polite to the data source
-        except Exception as e:
-            print(f"Skipped {stock['ticker']}: {e}")
-
-    results.sort(key=lambda r: abs(r["composite_score"]), reverse=True)
-
-    output = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "model": strategy_label,
-        "strategy_file": STRATEGY,
-        "hold_period_days_for_backtest": BACKTEST_HOLD_DAYS,
-        "results": results,
+// ---------- manual load (file / paste) ----------
+document.getElementById("fileInput").addEventListener("change", (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    try{
+      currentData = JSON.parse(ev.target.result);
+      render();
+    }catch(err){
+      alert("Could not parse that file as JSON: " + err.message);
     }
+  };
+  reader.readAsText(file);
+});
 
-    output = _sanitize_for_json(output)
+document.getElementById("loadPasted").addEventListener("click", ()=>{
+  const raw = document.getElementById("pasteArea").value.trim();
+  if(!raw) return;
+  try{
+    currentData = JSON.parse(raw);
+    render();
+  }catch(err){
+    alert("Could not parse pasted JSON: " + err.message);
+  }
+});
 
-    with open("india_stock_signals.json", "w") as f:
-        json.dump(output, f, indent=2)
+document.getElementById("capFilter").addEventListener("change", render);
+document.getElementById("recFilter").addEventListener("change", render);
 
-    print(f"Strategy: {strategy_label}")
-    print(f"Wrote {len(results)} results to india_stock_signals.json")
-    return output
+// ---------- passive auto-load of the JSON file (works with no token) ----------
+async function tryAutoLoad(showAlert){
+  if(location.protocol === "file:") return false;
+  try{
+    const res = await fetch(AUTO_FILE + "?t=" + Date.now(), {cache:"no-store"});
+    if(!res.ok) throw new Error("file not found at " + AUTO_FILE);
+    const data = await res.json();
+    currentData = data;
+    render();
+    return true;
+  }catch(err){
+    if(showAlert) alert("Could not load " + AUTO_FILE + ": " + err.message);
+    return false;
+  }
+}
 
+document.getElementById("refreshOnlyBtn").addEventListener("click", ()=>tryAutoLoad(true));
 
-if __name__ == "__main__":
-    run_scan()
+// ---------- GitHub connection persistence ----------
+function loadSavedConnection(){
+  try{
+    const saved = JSON.parse(localStorage.getItem("indiaStockDashConn") || "null");
+    if(saved){
+      document.getElementById("ghOwner").value = saved.owner || document.getElementById("ghOwner").value;
+      document.getElementById("ghRepo").value = saved.repo || document.getElementById("ghRepo").value;
+      document.getElementById("ghBranch").value = saved.branch || "main";
+      if(saved.token){
+        document.getElementById("ghToken").value = saved.token;
+        document.getElementById("rememberToken").checked = true;
+      }
+    }
+  }catch(e){ /* ignore corrupt storage */ }
+}
+
+document.getElementById("saveConnBtn").addEventListener("click", ()=>{
+  const cfg = getConnCfg();
+  if(document.getElementById("rememberToken").checked){
+    localStorage.setItem("indiaStockDashConn", JSON.stringify(cfg));
+    setStatus("Connection settings saved in this browser.", "ok");
+  }else{
+    localStorage.removeItem("indiaStockDashConn");
+    localStorage.setItem("indiaStockDashConn", JSON.stringify({...cfg, token:""}));
+    setStatus("Connection settings saved (token not remembered — re-enter it next visit).", "ok");
+  }
+  populateStrategyDropdown();
+});
+
+// ---------- strategy dropdown, populated from the repo's strategies/ folder ----------
+async function populateStrategyDropdown(){
+  const cfg = getConnCfg();
+  const select = document.getElementById("strategySelect");
+  let names = KNOWN_STRATEGY_FALLBACK;
+  if(cfg.owner && cfg.repo){
+    try{
+      const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/strategies?ref=${cfg.branch}`);
+      if(res.ok){
+        const files = await res.json();
+        const found = files.filter(f=>f.name.endsWith(".py")).map(f=>f.name.replace(/\.py$/, ""));
+        if(found.length) names = found;
+      }
+    }catch(e){ /* fall back to known list */ }
+  }
+  select.innerHTML = names.map(n=>`<option value="${n}">${n}</option>`).join("");
+
+  // try to pre-select whichever strategy is currently active, from the loaded JSON's strategy_file if present
+  if(currentData && currentData.strategy_file && names.includes(currentData.strategy_file)){
+    select.value = currentData.strategy_file;
+  }
+}
+
+// ---------- GitHub API: read/update the strategy file ----------
+async function getModelFile(cfg){
+  const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/india_stock_model.py?ref=${cfg.branch}`, {
+    headers: cfg.token ? {Authorization: `Bearer ${cfg.token}`} : {}
+  });
+  if(!res.ok) throw new Error("Could not read india_stock_model.py (HTTP " + res.status + ")");
+  const data = await res.json();
+  const content = b64DecodeUnicode(data.content.replace(/\n/g, ""));
+  return {content, sha: data.sha};
+}
+
+async function setStrategyOnGitHub(cfg, newStrategy){
+  setStatus("Checking current strategy setting...");
+  const {content, sha} = await getModelFile(cfg);
+  const re = /^STRATEGY\s*=\s*"[^"]*"/m;
+  if(!re.test(content)) throw new Error("Could not find the STRATEGY line in india_stock_model.py");
+  const desired = `STRATEGY = "${newStrategy}"`;
+  if(content.match(re)[0] === desired){
+    return false; // already set — nothing to commit
+  }
+  const updated = content.replace(re, desired);
+  setStatus(`Updating strategy to "${newStrategy}"...`);
+  const putRes = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/contents/india_stock_model.py`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${cfg.token}`,
+      Accept: "application/vnd.github+json",
+    },
+    body: JSON.stringify({
+      message: `Switch strategy to ${newStrategy} (via dashboard)`,
+      content: b64EncodeUnicode(updated),
+      sha: sha,
+      branch: cfg.branch,
+    }),
+  });
+  if(!putRes.ok) throw new Error("Failed to update strategy file (HTTP " + putRes.status + "). Check your token's permissions.");
+  return true;
+}
+
+// ---------- GitHub API: trigger and wait for a workflow run ----------
+async function triggerWorkflow(cfg){
+  setStatus("Triggering a fresh scan on GitHub...");
+  const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${cfg.token}`,
+      Accept: "application/vnd.github+json",
+    },
+    body: JSON.stringify({ref: cfg.branch}),
+  });
+  if(!res.ok) throw new Error("Failed to trigger the workflow (HTTP " + res.status + "). Check your token's Actions permission.");
+}
+
+async function waitForRunToFinish(cfg, sinceTime){
+  setStatus("Waiting for the scan to finish (usually 30–90 seconds)...");
+  for(let i = 0; i < 40; i++){
+    await new Promise(r=>setTimeout(r, 6000));
+    const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5`, {
+      headers: cfg.token ? {Authorization: `Bearer ${cfg.token}`} : {},
+    });
+    if(!res.ok) continue;
+    const data = await res.json();
+    const run = data.workflow_runs.find(r => new Date(r.created_at).getTime() >= sinceTime - 5000);
+    if(run){
+      setStatus(`Run status: ${run.status}${run.conclusion ? " (" + run.conclusion + ")" : ""}...`);
+      if(run.status === "completed"){
+        if(run.conclusion === "success") return;
+        throw new Error("The workflow run finished with status: " + run.conclusion + ". Check the Actions tab for the error log.");
+      }
+    }
+  }
+  throw new Error("Timed out waiting for the run to finish — check the Actions tab, it may still be going.");
+}
+
+async function waitForFreshData(previousGenTime){
+  setStatus("Run succeeded — waiting for GitHub Pages to publish the new file...");
+  for(let i = 0; i < 15; i++){
+    const ok = await tryAutoLoad(false);
+    if(ok && currentData && currentData.generated_at){
+      const genTime = new Date(currentData.generated_at).getTime();
+      if(genTime > previousGenTime){
+        return true;
+      }
+    }
+    await new Promise(r=>setTimeout(r, 6000));
+  }
+  return false;
+}
+
+// ---------- the main "Apply strategy & refresh" action ----------
+async function applyAndRun(){
+  const cfg = getConnCfg();
+  const btn = document.getElementById("applyRunBtn");
+  if(!cfg.token){
+    setStatus("No token entered — just reloading existing data. Add a token above to trigger live runs.", "error");
+    await tryAutoLoad(true);
+    return;
+  }
+  btn.disabled = true;
+  try{
+    const previousGenTime = currentData && currentData.generated_at ? new Date(currentData.generated_at).getTime() : 0;
+    const chosen = document.getElementById("strategySelect").value;
+    if(chosen) await setStrategyOnGitHub(cfg, chosen);
+    const since = Date.now();
+    await triggerWorkflow(cfg);
+    await waitForRunToFinish(cfg, since);
+    const gotFresh = await waitForFreshData(previousGenTime);
+    if(gotFresh){
+      setStatus("Up to date — last run " + new Date().toLocaleTimeString(), "ok");
+    }else{
+      setStatus("Workflow succeeded, but the live page hasn't picked up the new file yet (GitHub Pages can lag up to a couple minutes). Click 'Refresh (reload existing data)' again shortly.", "error");
+    }
+  }catch(err){
+    setStatus("Error: " + err.message, "error");
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+document.getElementById("applyRunBtn").addEventListener("click", applyAndRun);
+
+// ---------- init ----------
+loadSavedConnection();
+populateStrategyDropdown();
+tryAutoLoad(false);
+setInterval(()=>tryAutoLoad(false), POLL_MS);
+render();
+</script>
+</body>
+</html>
