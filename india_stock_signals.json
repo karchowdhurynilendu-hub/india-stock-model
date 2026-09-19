@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:58:29.903220+00:00",
+  "generated_at": "2026-09-19T06:03:59.484089+00:00",
   "model": "Trend/momentum + global macro + news sentiment overlay",
   "strategy_file": "macro_news_overlay",
   "hold_period_days_for_backtest": 10,
@@ -9,7 +9,7 @@
       "name": "Anupam Rasayan",
       "cap": "small",
       "price": 1207.7,
-      "composite_score": 1.87,
+      "composite_score": 1.86,
       "recommendation": "Watch (bullish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -18,14 +18,14 @@
       "trend": "up",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "ZENSARTECH.NS",
       "name": "Zensar Tech",
       "cap": "mid",
       "price": NaN,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -34,14 +34,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "KEI.NS",
       "name": "KEI Industries",
       "cap": "mid",
       "price": NaN,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -50,14 +50,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "SONATSOFTW.NS",
       "name": "Sonata Software",
       "cap": "small",
       "price": 274.0,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -66,14 +66,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "HBLENGINE.NS",
       "name": "HBL Engineering (formerly HBL Power)",
       "cap": "small",
       "price": NaN,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -82,14 +82,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "RAINBOW.NS",
       "name": "Rainbow Childrens Hosp",
       "cap": "small",
       "price": NaN,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -98,14 +98,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "TCIEXP.NS",
       "name": "TCI Express",
       "cap": "mid",
       "price": NaN,
-      "composite_score": -1.63,
+      "composite_score": -1.64,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -114,14 +114,14 @@
       "trend": "down",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "APTUS.NS",
       "name": "Aptus Value Housing",
       "cap": "small",
       "price": NaN,
-      "composite_score": -1.13,
+      "composite_score": -1.14,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -130,14 +130,14 @@
       "trend": "down",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "RELIANCE.NS",
       "name": "Reliance Industries",
       "cap": "large",
       "price": 1226.4,
-      "composite_score": -1.13,
+      "composite_score": -1.14,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -146,14 +146,14 @@
       "trend": "down",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "HDFCBANK.NS",
       "name": "HDFC Bank",
       "cap": "large",
       "price": 731.0,
-      "composite_score": -1.13,
+      "composite_score": -1.14,
       "recommendation": "Caution (bearish lean)",
       "candle_pattern": null,
       "candle_bias": null,
@@ -162,14 +162,14 @@
       "trend": "down",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "CRAFTSMAN.NS",
       "name": "Craftsman Automation",
       "cap": "mid",
       "price": 11138.0,
-      "composite_score": 0.87,
+      "composite_score": 0.86,
       "recommendation": "Neutral / monitor",
       "candle_pattern": null,
       "candle_bias": null,
@@ -178,14 +178,14 @@
       "trend": "up",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "COHANCE.NS",
       "name": "Cohance Lifesciences (formerly Suven Pharma)",
       "cap": "small",
       "price": 438.0,
-      "composite_score": 0.37,
+      "composite_score": 0.36,
       "recommendation": "Neutral / monitor",
       "candle_pattern": null,
       "candle_bias": null,
@@ -194,14 +194,14 @@
       "trend": "up",
       "volume_confirmed": false,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "REDINGTON.NS",
       "name": "Redington",
       "cap": "mid",
       "price": 399.85,
-      "composite_score": -0.13,
+      "composite_score": -0.14,
       "recommendation": "Neutral / monitor",
       "candle_pattern": null,
       "candle_bias": null,
@@ -210,14 +210,14 @@
       "trend": "up",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     },
     {
       "ticker": "GRAVITA.NS",
       "name": "Gravita India",
       "cap": "small",
       "price": 1598.4,
-      "composite_score": -0.13,
+      "composite_score": -0.14,
       "recommendation": "Neutral / monitor",
       "candle_pattern": null,
       "candle_bias": null,
@@ -226,7 +226,7 @@
       "trend": "down",
       "volume_confirmed": true,
       "macro_tailwind": -0.67,
-      "news_sentiment": 0.08
+      "news_sentiment": 0.07
     }
   ]
 }
