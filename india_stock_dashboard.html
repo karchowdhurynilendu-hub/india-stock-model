@@ -260,11 +260,11 @@ function render(){
     <tr>
       <td><div class="name">${r.name}</div><div class="ticker">${r.ticker}</div></td>
       <td><span class="badge ${capBadgeCls}">${r.cap}</span></td>
-      <td class="num">₹${r.price.toFixed(2)}</td>
+      <td class="num">${r.price != null ? "₹" + r.price.toFixed(2) : "—"}</td>
       <td class="num">${r.rsi != null ? r.rsi : "—"}</td>
       <td class="${trendCls}">${r.trend === "up" ? "↑ up" : "↓ down"}</td>
       <td>${r.candle_pattern ? r.candle_pattern : "—"}</td>
-      <td class="num ${compositeCls}">${r.composite_score > 0 ? "+" : ""}${r.composite_score}</td>
+      <td class="num ${compositeCls}">${r.composite_score != null ? (r.composite_score > 0 ? "+" : "") + r.composite_score : "—"}</td>
       <td class="num">${r.backtest_win_rate_pct != null ? r.backtest_win_rate_pct + "%" : "—"}</td>
       <td class="${cls}">${r.recommendation}</td>
     </tr>`;
