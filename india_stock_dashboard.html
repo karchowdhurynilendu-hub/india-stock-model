@@ -385,7 +385,7 @@ async function getModelFile(cfg){
 async function setStrategyOnGitHub(cfg, newStrategy){
   setStatus("Checking current strategy setting...");
   const {content, sha} = await getModelFile(cfg);
-  const re = /STRATEGY\s*=\s*"[^"]*"/;
+  const re = /^STRATEGY\s*=\s*"[^"]*"/m;
   if(!re.test(content)) throw new Error("Could not find the STRATEGY line in india_stock_model.py");
   const desired = `STRATEGY = "${newStrategy}"`;
   if(content.match(re)[0] === desired){
