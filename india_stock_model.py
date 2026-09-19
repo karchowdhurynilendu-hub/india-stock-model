@@ -37,7 +37,7 @@ TO ADD YOUR OWN STRATEGY:
 
         STRATEGY_LABEL = "Your strategy's display name"
 
-    Then set STRATEGY = "macd_crossover" below. No other code needs to
+    Then set STRATEGY = "my_strategy" below. No other code needs to
     change — the backtest and output format are generic and work with
     any strategy that produces a 'composite' column.
 
@@ -58,7 +58,7 @@ import yfinance as yf
 # ---------------------------------------------------------------------------
 # Config — this is what you edit day to day
 # ---------------------------------------------------------------------------
-STRATEGY = "macro_news_overlay"   # <-- change this to switch strategies
+STRATEGY = "trend_momentum_volume"   # <-- change this to switch strategies
 
 UNIVERSE = [
     {"ticker": "ZENSARTECH.NS", "name": "Zensar Tech", "cap": "mid"},
@@ -120,6 +120,21 @@ def backtest(df, threshold=BACKTEST_THRESHOLD):
     return round(100 * sum(outcomes) / len(outcomes), 1)
 
 
+def _sanitize_for_json(obj):
+    """Recursively replace NaN/Infinity floats with None so the output is
+    always valid JSON — Python's json module writes bare NaN/Infinity by
+    default, which is NOT valid JSON and breaks browser JSON.parse()."""
+    if isinstance(obj, float):
+        if np.isnan(obj) or np.isinf(obj):
+            return None
+        return obj
+    if isinstance(obj, dict):
+        return {k: _sanitize_for_json(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_sanitize_for_json(v) for v in obj]
+    return obj
+
+
 # ---------------------------------------------------------------------------
 # Run the scan
 # ---------------------------------------------------------------------------
@@ -139,7 +154,7 @@ def run_scan():
             # SMA20 > SMA50 with "Operands are not aligned". Flatten it.
             if isinstance(hist.columns, pd.MultiIndex):
                 hist.columns = hist.columns.get_level_values(0)
-            if hist.empty or len(hist) < 60:
+            if hist.empty or len(hist) < 60 or pd.isna(hist["Close"].iloc[-1]):
                 continue
 
             hist = strategy.build_signal(hist)
@@ -195,6 +210,8 @@ def run_scan():
         "hold_period_days_for_backtest": BACKTEST_HOLD_DAYS,
         "results": results,
     }
+
+    output = _sanitize_for_json(output)
 
     with open("india_stock_signals.json", "w") as f:
         json.dump(output, f, indent=2)
