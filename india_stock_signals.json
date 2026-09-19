@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T06:20:43.286063+00:00",
+  "generated_at": "2026-09-19T18:53:39.071864+00:00",
   "model": "Trend + momentum (RSI) + volume confirmation",
   "strategy_file": "trend_momentum_volume",
   "hold_period_days_for_backtest": 10,
@@ -19,6 +19,20 @@
       "volume_confirmed": true
     },
     {
+      "ticker": "HBLENGINE.NS",
+      "name": "HBL Engineering (formerly HBL Power)",
+      "cap": "small",
+      "price": 760.0,
+      "composite_score": -2.0,
+      "recommendation": "Strong caution (bearish)",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 51.2,
+      "rsi": 82.5,
+      "trend": "down",
+      "volume_confirmed": false
+    },
+    {
       "ticker": "CRAFTSMAN.NS",
       "name": "Craftsman Automation",
       "cap": "mid",
@@ -31,6 +45,20 @@
       "rsi": 50.43,
       "trend": "up",
       "volume_confirmed": true
+    },
+    {
+      "ticker": "ZENSARTECH.NS",
+      "name": "Zensar Tech",
+      "cap": "mid",
+      "price": 436.45,
+      "composite_score": -1.0,
+      "recommendation": "Caution (bearish lean)",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 57.0,
+      "rsi": 39.01,
+      "trend": "down",
+      "volume_confirmed": false
     },
     {
       "ticker": "SONATSOFTW.NS",
@@ -59,6 +87,34 @@
       "rsi": 37.51,
       "trend": "up",
       "volume_confirmed": false
+    },
+    {
+      "ticker": "RAINBOW.NS",
+      "name": "Rainbow Childrens Hosp",
+      "cap": "small",
+      "price": 1454.7,
+      "composite_score": -1.0,
+      "recommendation": "Caution (bearish lean)",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 67.5,
+      "rsi": 53.98,
+      "trend": "down",
+      "volume_confirmed": false
+    },
+    {
+      "ticker": "APTUS.NS",
+      "name": "Aptus Value Housing",
+      "cap": "small",
+      "price": 237.68,
+      "composite_score": 0.5,
+      "recommendation": "Neutral / monitor",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 60.1,
+      "rsi": 33.55,
+      "trend": "down",
+      "volume_confirmed": true
     },
     {
       "ticker": "REDINGTON.NS",
@@ -115,6 +171,34 @@
       "rsi": 59.89,
       "trend": "down",
       "volume_confirmed": true
+    },
+    {
+      "ticker": "KEI.NS",
+      "name": "KEI Industries",
+      "cap": "mid",
+      "price": 4650.0,
+      "composite_score": 0.0,
+      "recommendation": "Neutral / monitor",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 37.4,
+      "rsi": 18.01,
+      "trend": "down",
+      "volume_confirmed": false
+    },
+    {
+      "ticker": "TCIEXP.NS",
+      "name": "TCI Express",
+      "cap": "mid",
+      "price": 485.35,
+      "composite_score": 0.0,
+      "recommendation": "Neutral / monitor",
+      "candle_pattern": null,
+      "candle_bias": null,
+      "backtest_win_rate_pct": 59.0,
+      "rsi": 14.8,
+      "trend": "down",
+      "volume_confirmed": false
     }
   ]
 }
