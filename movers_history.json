@@ -418,5 +418,110 @@
         "pct_change": 2.44
       }
     ]
+  },
+  {
+    "date": "2026-09-23",
+    "movers": [
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 13.19
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 13.08
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 10.11
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 8.58
+      },
+      {
+        "ticker": "REDINGTON.NS",
+        "name": "Redington",
+        "pct_change": 8.29
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 7.63
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 7.1
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 6.88
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 6.53
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 6.28
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 4.86
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 4.31
+      },
+      {
+        "ticker": "TENNIND.NS",
+        "name": "Tenneco Clean Air India",
+        "pct_change": 3.87
+      },
+      {
+        "ticker": "HINDCOPPER.NS",
+        "name": "Hindustan Copper",
+        "pct_change": 3.66
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 3.64
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 3.08
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 2.82
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 2.55
+      },
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": 2.48
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 2.44
+      }
+    ]
   }
 ]
