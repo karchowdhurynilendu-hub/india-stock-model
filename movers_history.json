@@ -1,0 +1,107 @@
+[
+  {
+    "date": "2026-09-23",
+    "movers": [
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 15.36
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 10.73
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 10.94
+      },
+      {
+        "ticker": "OLAELEC.NS",
+        "name": "Ola Electric Mobility",
+        "pct_change": 12.43
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 18.24
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 10.84
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 8.47
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 8.46
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 8.13
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 6.73
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 6.58
+      },
+      {
+        "ticker": "HINDCOPPER.NS",
+        "name": "Hindustan Copper",
+        "pct_change": 6.52
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 6.11
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 5.94
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 4.96
+      },
+      {
+        "ticker": "KEI.NS",
+        "name": "KEI Industries",
+        "pct_change": 4.8
+      },
+      {
+        "ticker": "APTUS.NS",
+        "name": "Aptus Value Housing",
+        "pct_change": 4.76
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 4.01
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 3.66
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 3.64
+      }
+    ]
+  }
+]
