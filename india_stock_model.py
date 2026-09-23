@@ -89,7 +89,7 @@ import yfinance as yf
 # ---------------------------------------------------------------------------
 # Config — this is what you edit day to day
 # ---------------------------------------------------------------------------
-STRATEGY = "macro_news_overlay"   # <-- change this to switch strategies
+STRATEGY = "macd_crossover"   # <-- change this to switch strategies
 
 # Screener settings
 ENABLE_FULL_NSE_SCREEN = True   # try the full NSE list; auto-falls back if blocked
