@@ -102,6 +102,7 @@
 
 <h1>India equities signal dashboard</h1>
 <p class="subhead" id="genTime">No data loaded yet</p>
+<div id="nseStatusBanner" style="display:none; border-radius:4px; padding:10px 14px; margin-bottom:16px; font-size:12px; font-family:var(--mono); line-height:1.5;"></div>
 
 <div class="panel">
   <p class="panel-title">Strategy &amp; live run</p>
@@ -145,11 +146,11 @@
 </div>
 
 <div class="filters">
-  <select id="capFilter">
-    <option value="all">All market caps</option>
-    <option value="small">Small cap</option>
-    <option value="mid">Mid cap</option>
-    <option value="large">Large cap</option>
+  <select id="typeFilter">
+    <option value="all">All stocks</option>
+    <option value="ipo">Recent IPOs only</option>
+    <option value="screener">Screener gainers only</option>
+    <option value="backfill">Backfilled (quiet-day fill) only</option>
   </select>
   <select id="recFilter">
     <option value="all">All recommendations</option>
@@ -163,7 +164,7 @@
 <table>
   <thead>
     <tr>
-      <th>Stock</th><th>Cap</th><th class="num">Price</th><th class="num">RSI</th>
+      <th>Stock</th><th>Type</th><th class="num">Move %</th><th class="num">Price</th><th class="num">RSI</th>
       <th>Trend</th><th>Candle pattern</th><th class="num">Composite</th>
       <th class="num">Backtest win %</th><th>Recommendation</th>
     </tr>
@@ -219,15 +220,37 @@ function render(){
   emptyEl.style.display = "none";
 
   document.getElementById("genTime").textContent =
-    "Model: " + currentData.model + "  |  Generated: " + new Date(currentData.generated_at).toLocaleString();
+    "Model: " + currentData.model + "  |  Screener: " + (currentData.screener_direction || "—") +
+    " ≥" + (currentData.screener_threshold_pct ?? "—") + "%" +
+    "  |  Generated: " + new Date(currentData.generated_at).toLocaleString();
 
-  const capVal = document.getElementById("capFilter").value;
+  const bannerEl = document.getElementById("nseStatusBanner");
+  if(currentData.universe_source === "full_nse_list"){
+    bannerEl.style.display = "block";
+    bannerEl.style.background = "rgba(63,191,127,0.1)";
+    bannerEl.style.border = "1px solid var(--up)";
+    bannerEl.style.color = "var(--up)";
+    bannerEl.textContent = "✓ Live NSE data — this run screened the full official NSE list.";
+  }else if(currentData.universe_source === "fallback_pool"){
+    bannerEl.style.display = "block";
+    bannerEl.style.background = "rgba(217,164,65,0.1)";
+    bannerEl.style.border = "1px solid var(--accent)";
+    bannerEl.style.color = "var(--accent)";
+    bannerEl.textContent = "⚠ NSE blocked this run — used the smaller curated fallback pool instead. This is usually per-run, not permanent: each run gets a different server, so simply triggering another run (\"Apply strategy & refresh\") often succeeds next time. There's no manual \"unblock\" action — it isn't blocking you personally, just whichever server happened to run this time.";
+  }else{
+    bannerEl.style.display = "none";
+  }
+
+  const typeVal = document.getElementById("typeFilter").value;
   const recVal = document.getElementById("recFilter").value;
 
   const filtered = currentData.results.filter(r=>{
-    const capOk = capVal === "all" || r.cap === capVal;
+    const typeOk = typeVal === "all"
+      || (typeVal === "ipo" && r.is_recent_ipo)
+      || (typeVal === "screener" && r.flagged_by_screener && !r.backfilled)
+      || (typeVal === "backfill" && r.backfilled);
     const recOk = recVal === "all" || classify(r.recommendation.toLowerCase()) === recVal;
-    return capOk && recOk;
+    return typeOk && recOk;
   });
 
   const bullish = filtered.filter(r=>classify(r.recommendation.toLowerCase())==="bullish").length;
@@ -241,6 +264,7 @@ function render(){
     <div class="metric"><div class="label">SIGNALS</div><div class="value">${filtered.length}</div></div>
     <div class="metric"><div class="label">BULLISH</div><div class="value up">${bullish}</div></div>
     <div class="metric"><div class="label">BEARISH</div><div class="value down">${bearish}</div></div>
+    <div class="metric"><div class="label">RECENT IPOs</div><div class="value">${currentData.recent_ipos_detected ?? "—"}</div></div>
     <div class="metric"><div class="label">AVG BACKTEST WIN</div><div class="value">${avgWin!=null ? avgWin+"%" : "—"}</div></div>
   `;
 
@@ -255,11 +279,16 @@ function render(){
     const cls = classify(r.recommendation.toLowerCase());
     const compositeCls = r.composite_score > 0 ? "up" : r.composite_score < 0 ? "down" : "neutral";
     const trendCls = r.trend === "up" ? "up" : "down";
-    const capBadgeCls = r.cap === "small" ? "cap-small" : "";
+    let typeBadge = "screener";
+    let typeBadgeCls = "";
+    if(r.is_recent_ipo){ typeBadge = "IPO"; typeBadgeCls = "cap-small"; }
+    else if(r.backfilled){ typeBadge = "backfill"; }
+    const moveCls = r.screener_pct_change > 0 ? "up" : r.screener_pct_change < 0 ? "down" : "neutral";
     return `
     <tr>
       <td><div class="name">${r.name}</div><div class="ticker">${r.ticker}</div></td>
-      <td><span class="badge ${capBadgeCls}">${r.cap}</span></td>
+      <td><span class="badge ${typeBadgeCls}">${typeBadge}</span></td>
+      <td class="num ${moveCls}">${r.screener_pct_change != null ? (r.screener_pct_change > 0 ? "+" : "") + r.screener_pct_change + "%" : "—"}</td>
       <td class="num">${r.price != null ? "₹" + r.price.toFixed(2) : "—"}</td>
       <td class="num">${r.rsi != null ? r.rsi : "—"}</td>
       <td class="${trendCls}">${r.trend === "up" ? "↑ up" : "↓ down"}</td>
@@ -298,7 +327,7 @@ document.getElementById("loadPasted").addEventListener("click", ()=>{
   }
 });
 
-document.getElementById("capFilter").addEventListener("change", render);
+document.getElementById("typeFilter").addEventListener("change", render);
 document.getElementById("recFilter").addEventListener("change", render);
 
 // ---------- passive auto-load of the JSON file (works with no token) ----------
@@ -426,7 +455,7 @@ async function triggerWorkflow(cfg){
 
 async function waitForRunToFinish(cfg, sinceTime){
   setStatus("Waiting for the scan to finish (usually 30–90 seconds)...");
-  for(let i = 0; i < 40; i++){
+  for(let i = 0; i < 100; i++){
     await new Promise(r=>setTimeout(r, 6000));
     const res = await fetch(`${GITHUB_API}/repos/${cfg.owner}/${cfg.repo}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5`, {
       headers: cfg.token ? {Authorization: `Bearer ${cfg.token}`} : {},
@@ -445,13 +474,13 @@ async function waitForRunToFinish(cfg, sinceTime){
   throw new Error("Timed out waiting for the run to finish — check the Actions tab, it may still be going.");
 }
 
-async function waitForFreshData(sinceTime){
+async function waitForFreshData(previousGenTime){
   setStatus("Run succeeded — waiting for GitHub Pages to publish the new file...");
   for(let i = 0; i < 15; i++){
     const ok = await tryAutoLoad(false);
     if(ok && currentData && currentData.generated_at){
       const genTime = new Date(currentData.generated_at).getTime();
-      if(genTime >= sinceTime - 60000){ // allow a little clock slack
+      if(genTime > previousGenTime){
         return true;
       }
     }
@@ -471,12 +500,13 @@ async function applyAndRun(){
   }
   btn.disabled = true;
   try{
+    const previousGenTime = currentData && currentData.generated_at ? new Date(currentData.generated_at).getTime() : 0;
     const chosen = document.getElementById("strategySelect").value;
     if(chosen) await setStrategyOnGitHub(cfg, chosen);
     const since = Date.now();
     await triggerWorkflow(cfg);
     await waitForRunToFinish(cfg, since);
-    const gotFresh = await waitForFreshData(since);
+    const gotFresh = await waitForFreshData(previousGenTime);
     if(gotFresh){
       setStatus("Up to date — last run " + new Date().toLocaleTimeString(), "ok");
     }else{
