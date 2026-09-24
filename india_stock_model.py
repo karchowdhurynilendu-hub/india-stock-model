@@ -4,13 +4,16 @@ India Equities Signal Model — fully dynamic universe, pluggable strategy
 No fixed stock list. Every run:
 
   STAGE 1 — SCREENER (cheap, broad, dynamic):
-      Fetches the full official NSE equity list fresh (not hardcoded),
-      batch-downloads recent closing prices across all of it, and flags
-      GAINERS: stocks up >= MOVER_THRESHOLD_PCT over the last
-      MOVER_LOOKBACK_DAYS trading days. Separately, it detects RECENT
-      IPOs dynamically using each stock's actual listing date (from the
-      same NSE list) — anything listed within RECENT_IPO_WINDOW_DAYS
-      counts, automatically, with no manual list to maintain.
+      Uses the `pybhav` library to fetch NSE's official daily bhavcopy —
+      which lists EVERY security traded that day (typically 1,800-2,100+
+      symbols) — and flags GAINERS: stocks up >= MOVER_THRESHOLD_PCT over
+      the last ~MOVER_LOOKBACK_DAYS trading days. Separately, it detects
+      RECENT IPOs dynamically using each stock's actual listing date
+      (from NSE's official equity list) — anything listed within
+      RECENT_IPO_WINDOW_DAYS counts, automatically, with no manual list
+      to maintain. If bhavcopy is unavailable (pybhav not installed, or
+      NSE blocked it), this falls back to a smaller yfinance-based scan
+      over the curated FALLBACK_UNIVERSE (~106 stocks).
 
   STAGE 2 — DEEP ANALYSIS (thorough, narrow):
       Runs the full strategy (trend/momentum/backtest/etc, whichever is
@@ -32,9 +35,14 @@ WHAT THIS DELIBERATELY DOES NOT DO:
 
 HONEST LIMITATIONS:
   - NSE's servers sometimes block automated requests from cloud/CI IP
-    ranges (including GitHub Actions). Fetching the full NSE list is a
-    best-effort attempt with automatic fallback to FALLBACK_UNIVERSE
-    (a curated pool) if it fails — expected to happen on some days.
+    ranges (including GitHub Actions), and this can affect both the
+    bhavcopy fetch and the equity-list fetch independently. Each has its
+    own fallback — check "universe_source" and "recent_ipos_detected" in
+    the output to see what actually happened on a given run.
+  - pybhav is a young, minimally-adopted library (v0.0.2, alpha). It
+    handles NSE's session/cookie requirements properly, but hasn't been
+    battle-tested at scale — treat "bhavcopy_full_market" as usually
+    reliable, not guaranteed.
   - True BSE-only stocks (not cross-listed on NSE) aren't reachable
     through yfinance's .NS tickers at all.
   - On a very quiet market day, few or no stocks may clear the gainer
@@ -69,7 +77,7 @@ TO ADD YOUR OWN STRATEGY:
 
     Then set STRATEGY = "my_strategy" below.
 
-Requires: pip install yfinance pandas numpy requests
+Requires: pip install yfinance pandas numpy requests pybhav
 """
 
 import csv
@@ -86,13 +94,18 @@ import pandas as pd
 import requests
 import yfinance as yf
 
+try:
+    from pybhav import NSEBhavcopy, BhavcopNotAvailable, DownloadError
+    HAS_PYBHAV = True
+except ImportError:
+    HAS_PYBHAV = False
+
 # ---------------------------------------------------------------------------
 # Config — this is what you edit day to day
 # ---------------------------------------------------------------------------
-STRATEGY = "macro_news_overlay"   # <-- change this to switch strategies
+STRATEGY = "trend_momentum_volume"   # <-- change this to switch strategies
 
 # Screener settings
-ENABLE_FULL_NSE_SCREEN = True   # try the full NSE list; auto-falls back if blocked
 MOVER_DIRECTION = "gainers"     # "gainers" | "losers" | "both" — which moves qualify a stock for deep analysis
 MOVER_LOOKBACK_DAYS = 5         # ~1 trading week
 MOVER_THRESHOLD_PCT = 10.0      # flag a stock if its % change over the lookback clears this
@@ -140,6 +153,31 @@ FALLBACK_UNIVERSE = [
     {"ticker": "PWL.NS", "name": "PhysicsWallah"}, {"ticker": "PINELABS.NS", "name": "Pine Labs"},
     {"ticker": "TENNIND.NS", "name": "Tenneco Clean Air India"}, {"ticker": "JSWCEMENT.NS", "name": "JSW Cement"},
     {"ticker": "GROWW.NS", "name": "Groww (Billionbrains Garage Ventures)"},
+    # --- restored additional Nifty Smallcap 100 names ---
+    {"ticker": "HSCL.NS", "name": "Himadri Speciality Chemical"}, {"ticker": "SAILIFE.NS", "name": "Sai Life Sciences"},
+    {"ticker": "WOCKPHARMA.NS", "name": "Wockhardt"}, {"ticker": "STARHEALTH.NS", "name": "Star Health and Allied Insurance"},
+    {"ticker": "KARURVYSYA.NS", "name": "Karur Vysya Bank"}, {"ticker": "IKS.NS", "name": "Inventurus Knowledge Solutions"},
+    {"ticker": "NEULANDLAB.NS", "name": "Neuland Laboratories"}, {"ticker": "MRPL.NS", "name": "Mangalore Refinery & Petrochemicals"},
+    {"ticker": "CHOLAHLDNG.NS", "name": "Cholamandalam Financial Holdings"}, {"ticker": "NETWEB.NS", "name": "Netweb Technologies India"},
+    {"ticker": "PPLPHARMA.NS", "name": "Piramal Pharma"}, {"ticker": "GRSE.NS", "name": "Garden Reach Shipbuilders & Engineers"},
+    {"ticker": "CGCL.NS", "name": "Capri Global Capital"}, {"ticker": "DATAPATTNS.NS", "name": "Data Patterns (India)"},
+    {"ticker": "ITI.NS", "name": "ITI Ltd"}, {"ticker": "JYOTICNC.NS", "name": "Jyoti CNC Automation"},
+    {"ticker": "CUB.NS", "name": "City Union Bank"}, {"ticker": "FORCEMOT.NS", "name": "Force Motors"},
+    {"ticker": "ANANTRAJ.NS", "name": "Anant Raj"}, {"ticker": "SAGILITY.NS", "name": "Sagility India"},
+    {"ticker": "IFCI.NS", "name": "IFCI Ltd"}, {"ticker": "RAMCOCEM.NS", "name": "The Ramco Cements"},
+    {"ticker": "GESHIP.NS", "name": "The Great Eastern Shipping Company"}, {"ticker": "CASTROLIND.NS", "name": "Castrol India"},
+    {"ticker": "FSL.NS", "name": "Firstsource Solutions"}, {"ticker": "TRITURBINE.NS", "name": "Triveni Turbine"},
+    {"ticker": "SARDAEN.NS", "name": "Sarda Energy & Minerals"}, {"ticker": "AARTIIND.NS", "name": "Aarti Industries"},
+    {"ticker": "BEML.NS", "name": "BEML Ltd"}, {"ticker": "GMDCLTD.NS", "name": "Gujarat Mineral Development Corporation"},
+    {"ticker": "DEVYANI.NS", "name": "Devyani International"}, {"ticker": "DEEPAKFERT.NS", "name": "Deepak Fertilisers & Petrochemicals Corp"},
+    {"ticker": "CHAMBLFERT.NS", "name": "Chambal Fertilisers & Chemicals"}, {"ticker": "FIVESTAR.NS", "name": "Fivestar Business Finance"},
+    {"ticker": "GPIL.NS", "name": "Godawari Power & Ispat"}, {"ticker": "KFINTECH.NS", "name": "KFin Technologies"},
+    {"ticker": "PGEL.NS", "name": "PG Electroplast"}, {"ticker": "NATCOPHARM.NS", "name": "Natco Pharma"},
+    {"ticker": "JBMA.NS", "name": "JBM Auto"}, {"ticker": "INOXWIND.NS", "name": "Inox Wind"},
+    {"ticker": "JMFINANCIL.NS", "name": "JM Financial"}, {"ticker": "SIGNATURE.NS", "name": "Signatureglobal (India)"},
+    {"ticker": "IRCON.NS", "name": "Ircon International"}, {"ticker": "AFCONS.NS", "name": "Afcons Infrastructure"},
+    {"ticker": "BLS.NS", "name": "BLS International Services"}, {"ticker": "SWANENERGY.NS", "name": "Swan Corp (formerly Swan Energy)"},
+    {"ticker": "RPOWER.NS", "name": "Reliance Power"},
 ]
 
 
@@ -216,28 +254,15 @@ def fetch_full_nse_list():
     return None
 
 
-def get_screening_universe():
-    """Returns (universe, source_label). universe is a list of
-    {ticker, name, listing_date} — listing_date is None for the
-    fallback pool, since that's not dynamically sourced."""
-    if ENABLE_FULL_NSE_SCREEN:
-        full_list = fetch_full_nse_list()
-        if full_list:
-            print(f"Screening across {len(full_list)} NSE-listed equities (live full list).")
-            return full_list, "full_nse_list"
-    print(f"Screening across the fallback pool only ({len(FALLBACK_UNIVERSE)} stocks).")
-    fallback = [{"ticker": s["ticker"], "name": s["name"], "listing_date": None} for s in FALLBACK_UNIVERSE]
-    return fallback, "fallback_pool"
-
-
-def find_recent_ipos(screening_universe):
+def find_recent_ipos(nse_list):
     """Dynamically detects recently-listed stocks using each stock's
-    real listing date — no hardcoded IPO list. Returns None entries are
-    skipped (the fallback pool has no listing dates, so this returns
-    nothing when NSE's list wasn't available)."""
+    real listing date — no hardcoded IPO list. Returns [] if the NSE
+    name/listing list wasn't available this run."""
+    if not nse_list:
+        return []
     cutoff = datetime.now(timezone.utc).date() - timedelta(days=RECENT_IPO_WINDOW_DAYS)
     recent = []
-    for s in screening_universe:
+    for s in nse_list:
         if not s.get("listing_date"):
             continue
         try:
@@ -248,14 +273,67 @@ def find_recent_ipos(screening_universe):
     return recent
 
 
-def run_screener(screening_universe):
-    """Batch-downloads recent closes across the screening universe and
-    flags stocks whose % change over MOVER_LOOKBACK_DAYS trading days
-    clears MOVER_THRESHOLD_PCT in the configured MOVER_DIRECTION. Cheap
-    by design: no indicators, no backtest, just a % change check."""
-    tickers = [s["ticker"] for s in screening_universe]
-    lookup = {s["ticker"]: s for s in screening_universe}
-    scored = []  # every stock with a computed pct_change, for the backfill step
+def fetch_bhavcopy_movers(name_lookup, window_calendar_days=12):
+    """Uses pybhav to fetch NSE's official daily bhavcopy — which lists
+    EVERY security traded that day (typically 1,800-2,100+ symbols) —
+    across a short window, and computes % change per symbol between the
+    earliest and latest available trading day in that window. This is
+    what makes 1,000+ stock coverage practical: one bulk file covering
+    the whole market, rather than thousands of individual API calls.
+    Returns a scored list, or None if bhavcopy is unavailable this run
+    (pybhav not installed, NSE blocked it, etc.)."""
+    if not HAS_PYBHAV:
+        print("pybhav not installed; skipping bhavcopy screening.")
+        return None
+    try:
+        nse = NSEBhavcopy(cache_dir=None)  # no local caching needed for a one-shot CI run
+        end = datetime.now(timezone.utc).date()
+        start = end - timedelta(days=window_calendar_days)
+        df = nse.get_range(start.isoformat(), end.isoformat(), segment="CM", skip_errors=True)
+    except Exception as e:
+        print(f"Bhavcopy fetch failed: {e}")
+        return None
+
+    if df is None or df.empty or "_date" not in df.columns:
+        print("Bhavcopy returned no usable data this run.")
+        return None
+
+    df.columns = df.columns.astype(str).str.strip()
+    if "SERIES" in df.columns:
+        df = df[df["SERIES"].astype(str).str.strip() == "EQ"]
+    if "SYMBOL" not in df.columns or "CLOSE" not in df.columns:
+        print("Bhavcopy data missing expected SYMBOL/CLOSE columns; skipping.")
+        return None
+
+    df = df.sort_values("_date")
+    scored = []
+    for symbol, g in df.groupby("SYMBOL"):
+        if len(g) < 2:
+            continue
+        try:
+            past_close = float(g.iloc[0]["CLOSE"])
+            recent_close = float(g.iloc[-1]["CLOSE"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        if past_close == 0 or np.isnan(past_close) or np.isnan(recent_close):
+            continue
+        pct_change = round(100 * (recent_close - past_close) / past_close, 2)
+        ticker = f"{symbol}.NS"
+        scored.append({
+            "ticker": ticker,
+            "name": name_lookup.get(ticker, str(symbol)),
+            "screener_pct_change": pct_change,
+        })
+    return scored if scored else None
+
+
+def _yfinance_batch_scan(universe):
+    """Fallback screener: batch-downloads recent closes via yfinance
+    across a smaller, fixed universe. Used only when bhavcopy isn't
+    available (pybhav missing, or NSE blocked the bhavcopy fetch)."""
+    tickers = [s["ticker"] for s in universe]
+    lookup = {s["ticker"]: s for s in universe}
+    scored = []
 
     for i in range(0, len(tickers), SCREENER_BATCH_SIZE):
         batch = tickers[i : i + SCREENER_BATCH_SIZE]
@@ -285,6 +363,12 @@ def run_screener(screening_universe):
             except Exception:
                 continue
 
+    return scored
+
+
+def _finalize_movers(scored):
+    """Applies the direction/threshold filter, then backfills with the
+    next-highest movers if too few qualify so quiet days aren't empty."""
     if MOVER_DIRECTION == "gainers":
         movers = [s for s in scored if s["screener_pct_change"] >= MOVER_THRESHOLD_PCT]
     elif MOVER_DIRECTION == "losers":
@@ -292,8 +376,6 @@ def run_screener(screening_universe):
     else:
         movers = [s for s in scored if abs(s["screener_pct_change"]) >= MOVER_THRESHOLD_PCT]
 
-    # Backfill on quiet days so the dashboard isn't empty: add the next
-    # highest-ranked movers (by the same direction) until MIN_DEEP_DIVE_SIZE.
     if len(movers) < MIN_DEEP_DIVE_SIZE:
         flagged_tickers = {m["ticker"] for m in movers}
         remaining = [s for s in scored if s["ticker"] not in flagged_tickers]
@@ -309,6 +391,21 @@ def run_screener(screening_universe):
             movers.append(s)
 
     return movers
+
+
+def run_screener(name_lookup):
+    """Tries the full-market bhavcopy screener first (1,000+ symbols).
+    Falls back to a smaller yfinance batch scan over the curated pool
+    only if bhavcopy is unavailable this run. Returns (movers, source_label)."""
+    scored = fetch_bhavcopy_movers(name_lookup)
+    if scored is not None:
+        print(f"Screened {len(scored)} symbols via NSE bhavcopy (full market).")
+        return _finalize_movers(scored), "bhavcopy_full_market"
+
+    print("Bhavcopy screening unavailable this run — falling back to the curated pool via yfinance.")
+    fallback_universe = [{"ticker": s["ticker"], "name": s["name"]} for s in FALLBACK_UNIVERSE]
+    scored = _yfinance_batch_scan(fallback_universe)
+    return _finalize_movers(scored), "fallback_pool"
 
 
 def update_movers_history(movers):
@@ -393,12 +490,14 @@ def run_scan():
     strategy = load_strategy(STRATEGY)
     strategy_label = getattr(strategy, "STRATEGY_LABEL", STRATEGY)
 
-    print("Stage 1: fetching screening universe and scanning for gainers...")
-    screening_universe, universe_source = get_screening_universe()
-    movers = run_screener(screening_universe)
-    recent_ipos = find_recent_ipos(screening_universe)
+    print("Stage 1: fetching NSE name/listing reference and screening for movers...")
+    nse_list = fetch_full_nse_list()
+    name_lookup = {e["ticker"]: e["name"] for e in nse_list} if nse_list else {}
+    recent_ipos = find_recent_ipos(nse_list)
+
+    movers, universe_source = run_screener(name_lookup)
     update_movers_history(movers)
-    print(f"Screener flagged {len(movers)} stocks (direction={MOVER_DIRECTION}, threshold={MOVER_THRESHOLD_PCT}%).")
+    print(f"Screener flagged {len(movers)} stocks (direction={MOVER_DIRECTION}, threshold={MOVER_THRESHOLD_PCT}%, source={universe_source}).")
     print(f"Dynamically detected {len(recent_ipos)} recent IPOs (listed within {RECENT_IPO_WINDOW_DAYS} days).")
 
     # Fully dynamic deep-dive universe: movers ∪ recent IPOs. No fixed list.
