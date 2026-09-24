@@ -838,5 +838,110 @@
         "pct_change": 5.9
       }
     ]
+  },
+  {
+    "date": "2026-09-24",
+    "movers": [
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 15.36
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 10.73
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 10.94
+      },
+      {
+        "ticker": "OLAELEC.NS",
+        "name": "Ola Electric Mobility",
+        "pct_change": 12.43
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 18.24
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 10.84
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 15.25
+      },
+      {
+        "ticker": "IKS.NS",
+        "name": "Inventurus Knowledge Solutions",
+        "pct_change": 10.61
+      },
+      {
+        "ticker": "JYOTICNC.NS",
+        "name": "Jyoti CNC Automation",
+        "pct_change": 13.75
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 8.47
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 8.46
+      },
+      {
+        "ticker": "ANANTRAJ.NS",
+        "name": "Anant Raj",
+        "pct_change": 8.28
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 8.13
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 6.73
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 6.63
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 6.58
+      },
+      {
+        "ticker": "HINDCOPPER.NS",
+        "name": "Hindustan Copper",
+        "pct_change": 6.52
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 6.11
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 5.94
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 5.9
+      }
+    ]
   }
 ]
