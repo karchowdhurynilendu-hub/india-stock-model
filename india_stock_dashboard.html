@@ -225,18 +225,18 @@ function render(){
     "  |  Generated: " + new Date(currentData.generated_at).toLocaleString();
 
   const bannerEl = document.getElementById("nseStatusBanner");
-  if(currentData.universe_source === "full_nse_list"){
+  if(currentData.universe_source === "bhavcopy_full_market"){
     bannerEl.style.display = "block";
     bannerEl.style.background = "rgba(63,191,127,0.1)";
     bannerEl.style.border = "1px solid var(--up)";
     bannerEl.style.color = "var(--up)";
-    bannerEl.textContent = "✓ Live NSE data — this run screened the full official NSE list.";
+    bannerEl.textContent = "✓ Live full-market data — this run screened NSE's official daily bhavcopy (every traded security, typically 1,800+ stocks).";
   }else if(currentData.universe_source === "fallback_pool"){
     bannerEl.style.display = "block";
     bannerEl.style.background = "rgba(217,164,65,0.1)";
     bannerEl.style.border = "1px solid var(--accent)";
     bannerEl.style.color = "var(--accent)";
-    bannerEl.textContent = "⚠ NSE blocked this run — used the smaller curated fallback pool instead. This is usually per-run, not permanent: each run gets a different server, so simply triggering another run (\"Apply strategy & refresh\") often succeeds next time. There's no manual \"unblock\" action — it isn't blocking you personally, just whichever server happened to run this time.";
+    bannerEl.textContent = "⚠ Full-market data unavailable this run — used the smaller curated fallback pool (~106 stocks) instead. This is usually per-run, not permanent: each run gets a different server, so simply triggering another run (\"Apply strategy & refresh\") often succeeds next time. There's no manual \"unblock\" action — it isn't blocking you personally, just whichever server happened to run this time.";
   }else{
     bannerEl.style.display = "none";
   }
