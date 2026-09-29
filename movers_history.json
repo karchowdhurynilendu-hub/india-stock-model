@@ -1048,5 +1048,110 @@
         "pct_change": 2.11
       }
     ]
+  },
+  {
+    "date": "2026-09-29",
+    "movers": [
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 23.18
+      },
+      {
+        "ticker": "TCIEXP.NS",
+        "name": "TCI Express",
+        "pct_change": 9.4
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 5.36
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 5.31
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 5.18
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 4.38
+      },
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 4.05
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": 3.44
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 2.51
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": 2.16
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": 2.13
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": 1.64
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 1.14
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 0.82
+      },
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 0.53
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 0.4
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 0.33
+      },
+      {
+        "ticker": "HSCL.NS",
+        "name": "Himadri Speciality Chemical",
+        "pct_change": -0.28
+      },
+      {
+        "ticker": "JMFINANCIL.NS",
+        "name": "JM Financial",
+        "pct_change": -0.42
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": -0.5
+      }
+    ]
   }
 ]
