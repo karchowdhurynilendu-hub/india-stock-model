@@ -1153,5 +1153,110 @@
         "pct_change": -0.5
       }
     ]
+  },
+  {
+    "date": "2026-09-30",
+    "movers": [
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 6.32
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 5.14
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 3.94
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": 3.77
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": 3.26
+      },
+      {
+        "ticker": "TCIEXP.NS",
+        "name": "TCI Express",
+        "pct_change": 3.17
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 2.89
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 1.79
+      },
+      {
+        "ticker": "REDINGTON.NS",
+        "name": "Redington",
+        "pct_change": 1.56
+      },
+      {
+        "ticker": "HSCL.NS",
+        "name": "Himadri Speciality Chemical",
+        "pct_change": 1.51
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": 1.24
+      },
+      {
+        "ticker": "JMFINANCIL.NS",
+        "name": "JM Financial",
+        "pct_change": 1.18
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 0.32
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 0.11
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": -0.26
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": -0.36
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": -0.37
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": -1.01
+      },
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": -1.04
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": -1.21
+      }
+    ]
   }
 ]
