@@ -1258,5 +1258,110 @@
         "pct_change": -1.21
       }
     ]
+  },
+  {
+    "date": "2026-10-01",
+    "movers": [
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 4.81
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 4.32
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 3.42
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 3.24
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 2.79
+      },
+      {
+        "ticker": "TCIEXP.NS",
+        "name": "TCI Express",
+        "pct_change": 2.44
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 2.29
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": 2.23
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": 2.18
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 0.96
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 0.52
+      },
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 0.35
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 0.16
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 0.09
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": -0.23
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": -0.33
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": -0.63
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": -0.79
+      },
+      {
+        "ticker": "SARDAEN.NS",
+        "name": "Sarda Energy & Minerals",
+        "pct_change": -0.94
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": -1.0
+      }
+    ]
   }
 ]
