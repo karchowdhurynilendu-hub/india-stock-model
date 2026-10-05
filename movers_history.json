@@ -1468,5 +1468,110 @@
         "pct_change": -1.0
       }
     ]
+  },
+  {
+    "date": "2026-10-05",
+    "movers": [
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 8.29
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "Netweb Technologies India",
+        "pct_change": 4.84
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 4.76
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 4.35
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 4.15
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 3.82
+      },
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 2.26
+      },
+      {
+        "ticker": "SARDAEN.NS",
+        "name": "Sarda Energy & Minerals",
+        "pct_change": 1.59
+      },
+      {
+        "ticker": "REDINGTON.NS",
+        "name": "Redington",
+        "pct_change": 1.35
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 1.0
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": 0.97
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 0.92
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 0.88
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 0.36
+      },
+      {
+        "ticker": "CHOLAHLDNG.NS",
+        "name": "Cholamandalam Financial Holdings",
+        "pct_change": 0.27
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 0.24
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": -0.01
+      },
+      {
+        "ticker": "NEULANDLAB.NS",
+        "name": "Neuland Laboratories",
+        "pct_change": -0.07
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": -0.2
+      },
+      {
+        "ticker": "FIVESTAR.NS",
+        "name": "Fivestar Business Finance",
+        "pct_change": -0.36
+      }
+    ]
   }
 ]
