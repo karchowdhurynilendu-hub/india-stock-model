@@ -1573,5 +1573,110 @@
         "pct_change": -0.36
       }
     ]
+  },
+  {
+    "date": "2026-10-06",
+    "movers": [
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 12.08
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 7.86
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 7.65
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 7.39
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 7.0
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 6.72
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 5.36
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 5.27
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 4.46
+      },
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 4.43
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 4.11
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 3.83
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 3.8
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 3.73
+      },
+      {
+        "ticker": "RPOWER.NS",
+        "name": "Reliance Power",
+        "pct_change": 3.64
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 3.44
+      },
+      {
+        "ticker": "FIVESTAR.NS",
+        "name": "Fivestar Business Finance",
+        "pct_change": 3.44
+      },
+      {
+        "ticker": "TCIEXP.NS",
+        "name": "TCI Express",
+        "pct_change": 3.17
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 3.15
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 3.11
+      }
+    ]
   }
 ]
