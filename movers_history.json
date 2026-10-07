@@ -1678,5 +1678,110 @@
         "pct_change": 3.11
       }
     ]
+  },
+  {
+    "date": "2026-10-07",
+    "movers": [
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 10.52
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 10.22
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 13.03
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 8.66
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 8.02
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 7.53
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 6.83
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 5.8
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 5.79
+      },
+      {
+        "ticker": "KEI.NS",
+        "name": "KEI Industries",
+        "pct_change": 5.0
+      },
+      {
+        "ticker": "AMBER.NS",
+        "name": "Amber Enterprises India",
+        "pct_change": 4.82
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 4.77
+      },
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 4.22
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 4.14
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 4.07
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 3.85
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": 3.59
+      },
+      {
+        "ticker": "CAMS.NS",
+        "name": "Computer Age Management Services",
+        "pct_change": 3.52
+      },
+      {
+        "ticker": "PINELABS.NS",
+        "name": "Pine Labs",
+        "pct_change": 3.42
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 3.36
+      }
+    ]
   }
 ]
