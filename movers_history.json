@@ -1783,5 +1783,110 @@
         "pct_change": 3.36
       }
     ]
+  },
+  {
+    "date": "2026-10-08",
+    "movers": [
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 16.9
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 7.12
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 6.93
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 6.86
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 6.58
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 6.17
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 6.13
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 5.52
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 5.31
+      },
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 5.14
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 4.93
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "Netweb Technologies India",
+        "pct_change": 4.31
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 4.12
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 3.45
+      },
+      {
+        "ticker": "AARTIIND.NS",
+        "name": "Aarti Industries",
+        "pct_change": 2.78
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 2.5
+      },
+      {
+        "ticker": "RPOWER.NS",
+        "name": "Reliance Power",
+        "pct_change": 2.01
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 1.98
+      },
+      {
+        "ticker": "CREDITACC.NS",
+        "name": "CreditAccess Grameen",
+        "pct_change": 1.97
+      },
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 1.75
+      }
+    ]
   }
 ]
