@@ -1993,5 +1993,110 @@
         "pct_change": 2.65
       }
     ]
+  },
+  {
+    "date": "2026-10-12",
+    "movers": [
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 11.87
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 10.14
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 8.52
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 7.75
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 7.73
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 7.65
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 6.99
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 6.66
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 5.98
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 5.73
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 5.5
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 5.42
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 5.35
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": 5.22
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "Netweb Technologies India",
+        "pct_change": 4.95
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 4.07
+      },
+      {
+        "ticker": "CREDITACC.NS",
+        "name": "CreditAccess Grameen",
+        "pct_change": 3.97
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 3.49
+      },
+      {
+        "ticker": "TATACHEM.NS",
+        "name": "Tata Chemicals",
+        "pct_change": 3.17
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 2.99
+      }
+    ]
   }
 ]
