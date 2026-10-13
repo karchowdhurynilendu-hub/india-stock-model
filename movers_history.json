@@ -2098,5 +2098,110 @@
         "pct_change": 2.99
       }
     ]
+  },
+  {
+    "date": "2026-10-13",
+    "movers": [
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 10.76
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 13.34
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 9.71
+      },
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 9.31
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 8.7
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 7.45
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 7.36
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 6.62
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 6.53
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 6.26
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 6.2
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 6.17
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "Netweb Technologies India",
+        "pct_change": 6.08
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 6.07
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 5.96
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 5.47
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 5.17
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": 4.64
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 4.2
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 4.13
+      }
+    ]
   }
 ]
