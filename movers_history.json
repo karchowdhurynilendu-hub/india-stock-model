@@ -2203,5 +2203,110 @@
         "pct_change": 4.13
       }
     ]
+  },
+  {
+    "date": "2026-10-14",
+    "movers": [
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 11.95
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 11.15
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 8.82
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "Netweb Technologies India",
+        "pct_change": 8.29
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 8.12
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 7.89
+      },
+      {
+        "ticker": "IDBI.NS",
+        "name": "IDBI Bank",
+        "pct_change": 7.03
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 6.32
+      },
+      {
+        "ticker": "CESC.NS",
+        "name": "CESC Ltd",
+        "pct_change": 6.22
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 6.15
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 6.02
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 5.67
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 5.61
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 4.32
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 4.22
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 3.95
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 3.55
+      },
+      {
+        "ticker": "TATACHEM.NS",
+        "name": "Tata Chemicals",
+        "pct_change": 3.15
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 3.04
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 3.0
+      }
+    ]
   }
 ]
