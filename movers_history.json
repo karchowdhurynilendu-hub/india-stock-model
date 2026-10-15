@@ -2308,5 +2308,110 @@
         "pct_change": 3.0
       }
     ]
+  },
+  {
+    "date": "2026-10-15",
+    "movers": [
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 14.36
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 10.91
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 10.33
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 9.73
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 9.1
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 7.15
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFin Technologies",
+        "pct_change": 6.85
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 6.76
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 6.61
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 6.58
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 6.53
+      },
+      {
+        "ticker": "CROMPTON.NS",
+        "name": "Crompton Greaves Consumer Electricals",
+        "pct_change": 6.44
+      },
+      {
+        "ticker": "CESC.NS",
+        "name": "CESC Ltd",
+        "pct_change": 6.3
+      },
+      {
+        "ticker": "CAMS.NS",
+        "name": "Computer Age Management Services",
+        "pct_change": 6.3
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 6.0
+      },
+      {
+        "ticker": "TATACHEM.NS",
+        "name": "Tata Chemicals",
+        "pct_change": 5.92
+      },
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": 5.69
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 5.47
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "Garden Reach Shipbuilders & Engineers",
+        "pct_change": 5.3
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 5.1
+      }
+    ]
   }
 ]
