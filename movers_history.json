@@ -2728,5 +2728,110 @@
         "pct_change": 1.9
       }
     ]
+  },
+  {
+    "date": "2026-10-21",
+    "movers": [
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 10.31
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 7.18
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 5.6
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 4.54
+      },
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": 3.0
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 2.96
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 2.05
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "Whirlpool of India",
+        "pct_change": 1.09
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": 0.99
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 0.69
+      },
+      {
+        "ticker": "JSWCEMENT.NS",
+        "name": "JSW Cement",
+        "pct_change": 0.42
+      },
+      {
+        "ticker": "CHAMBLFERT.NS",
+        "name": "Chambal Fertilisers & Chemicals",
+        "pct_change": 0.2
+      },
+      {
+        "ticker": "SIGNATURE.NS",
+        "name": "Signatureglobal (India)",
+        "pct_change": 0.17
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": -0.46
+      },
+      {
+        "ticker": "BLS.NS",
+        "name": "BLS International Services",
+        "pct_change": -0.49
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": -0.81
+      },
+      {
+        "ticker": "RAINBOW.NS",
+        "name": "Rainbow Childrens Hosp",
+        "pct_change": -0.91
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": -1.09
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": -1.12
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": -1.44
+      }
+    ]
   }
 ]
