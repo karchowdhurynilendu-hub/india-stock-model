@@ -2833,5 +2833,110 @@
         "pct_change": -1.44
       }
     ]
+  },
+  {
+    "date": "2026-10-22",
+    "movers": [
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 9.55
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 5.91
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 3.75
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 2.33
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 1.69
+      },
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": 1.49
+      },
+      {
+        "ticker": "SIGNATURE.NS",
+        "name": "Signatureglobal (India)",
+        "pct_change": 1.1
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": 0.55
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": 0.31
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": 0.17
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": -0.03
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": -0.14
+      },
+      {
+        "ticker": "JSWCEMENT.NS",
+        "name": "JSW Cement",
+        "pct_change": -0.22
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": -0.25
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": -0.33
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": -0.36
+      },
+      {
+        "ticker": "BLS.NS",
+        "name": "BLS International Services",
+        "pct_change": -0.39
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": -0.47
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": -0.7
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": -1.54
+      }
+    ]
   }
 ]
