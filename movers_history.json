@@ -2938,5 +2938,110 @@
         "pct_change": -1.54
       }
     ]
+  },
+  {
+    "date": "2026-10-23",
+    "movers": [
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 8.53
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 4.21
+      },
+      {
+        "ticker": "JSWCEMENT.NS",
+        "name": "JSW Cement",
+        "pct_change": 3.14
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 2.31
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 1.41
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": 1.28
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": -0.05
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "Castrol India",
+        "pct_change": -0.93
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": -1.01
+      },
+      {
+        "ticker": "SIGNATURE.NS",
+        "name": "Signatureglobal (India)",
+        "pct_change": -1.08
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": -1.82
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": -1.91
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": -2.03
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": -2.26
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": -2.38
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": -2.52
+      },
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": -2.54
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": -2.94
+      },
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": -3.07
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": -3.07
+      }
+    ]
   }
 ]
