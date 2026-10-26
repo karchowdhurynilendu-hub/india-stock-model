@@ -3043,5 +3043,110 @@
         "pct_change": -3.07
       }
     ]
+  },
+  {
+    "date": "2026-10-26",
+    "movers": [
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 7.83
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 3.88
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 3.76
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 3.26
+      },
+      {
+        "ticker": "JSWCEMENT.NS",
+        "name": "JSW Cement",
+        "pct_change": 2.26
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 1.57
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": 0.79
+      },
+      {
+        "ticker": "NATCOPHARM.NS",
+        "name": "Natco Pharma",
+        "pct_change": 0.76
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": -0.23
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": -0.26
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": -0.65
+      },
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": -0.78
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": -1.16
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": -1.38
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": -1.65
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": -1.77
+      },
+      {
+        "ticker": "DEVYANI.NS",
+        "name": "Devyani International",
+        "pct_change": -2.13
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": -2.26
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": -2.26
+      },
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": -2.9
+      }
+    ]
   }
 ]
