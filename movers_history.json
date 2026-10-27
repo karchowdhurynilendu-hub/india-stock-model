@@ -3148,5 +3148,110 @@
         "pct_change": -2.9
       }
     ]
+  },
+  {
+    "date": "2026-10-27",
+    "movers": [
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 10.87
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 8.18
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 7.02
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 6.45
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "Anand Rathi Wealth",
+        "pct_change": 4.4
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 3.82
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 3.75
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML Ltd",
+        "pct_change": 3.13
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "Dr Lal PathLabs",
+        "pct_change": 3.03
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 2.61
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "Kaynes Technology India",
+        "pct_change": 2.43
+      },
+      {
+        "ticker": "DEVYANI.NS",
+        "name": "Devyani International",
+        "pct_change": 1.94
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": 1.87
+      },
+      {
+        "ticker": "DATAPATTNS.NS",
+        "name": "Data Patterns (India)",
+        "pct_change": 1.72
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 1.53
+      },
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": 1.51
+      },
+      {
+        "ticker": "IKS.NS",
+        "name": "Inventurus Knowledge Solutions",
+        "pct_change": 1.07
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": 0.85
+      },
+      {
+        "ticker": "JSWCEMENT.NS",
+        "name": "JSW Cement",
+        "pct_change": 0.73
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 0.71
+      }
+    ]
   }
 ]
