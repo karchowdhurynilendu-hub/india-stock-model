@@ -3358,5 +3358,110 @@
         "pct_change": 3.56
       }
     ]
+  },
+  {
+    "date": "2026-10-29",
+    "movers": [
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 14.21
+      },
+      {
+        "ticker": "OLAELEC.NS",
+        "name": "Ola Electric Mobility",
+        "pct_change": 10.08
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": 18.35
+      },
+      {
+        "ticker": "RPOWER.NS",
+        "name": "Reliance Power",
+        "pct_change": 11.32
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 9.91
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 7.86
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 7.2
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 7.15
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 7.01
+      },
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 6.85
+      },
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": 6.64
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 6.6
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 6.33
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 6.06
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 5.89
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 4.96
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 4.65
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 4.4
+      },
+      {
+        "ticker": "HBLENGINE.NS",
+        "name": "HBL Engineering",
+        "pct_change": 3.99
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 3.95
+      }
+    ]
   }
 ]
