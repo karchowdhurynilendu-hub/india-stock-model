@@ -3463,5 +3463,110 @@
         "pct_change": 3.95
       }
     ]
+  },
+  {
+    "date": "2026-10-30",
+    "movers": [
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 18.28
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 13.19
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 11.79
+      },
+      {
+        "ticker": "OLAELEC.NS",
+        "name": "Ola Electric Mobility",
+        "pct_change": 10.86
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 15.11
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 11.62
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": 25.04
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 12.76
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 9.77
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 9.52
+      },
+      {
+        "ticker": "RPOWER.NS",
+        "name": "Reliance Power",
+        "pct_change": 9.01
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 8.47
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 7.54
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML Ltd",
+        "pct_change": 7.42
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 6.72
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFin Technologies",
+        "pct_change": 6.5
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "The Great Eastern Shipping Company",
+        "pct_change": 6.48
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 6.27
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 5.89
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 5.82
+      }
+    ]
   }
 ]
