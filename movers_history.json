@@ -3568,5 +3568,110 @@
         "pct_change": 5.82
       }
     ]
+  },
+  {
+    "date": "2026-11-02",
+    "movers": [
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "Sona BLW Precision Forgings",
+        "pct_change": 15.87
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 17.65
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 10.34
+      },
+      {
+        "ticker": "NBCC.NS",
+        "name": "NBCC (India)",
+        "pct_change": 10.9
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 14.4
+      },
+      {
+        "ticker": "OLAELEC.NS",
+        "name": "Ola Electric Mobility",
+        "pct_change": 16.93
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 14.76
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 15.65
+      },
+      {
+        "ticker": "CHOLAHLDNG.NS",
+        "name": "Cholamandalam Financial Holdings",
+        "pct_change": 11.77
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "Piramal Pharma",
+        "pct_change": 22.93
+      },
+      {
+        "ticker": "ITI.NS",
+        "name": "ITI Ltd",
+        "pct_change": 19.18
+      },
+      {
+        "ticker": "TRITURBINE.NS",
+        "name": "Triveni Turbine",
+        "pct_change": 10.37
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML Ltd",
+        "pct_change": 10.1
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 12.22
+      },
+      {
+        "ticker": "RPOWER.NS",
+        "name": "Reliance Power",
+        "pct_change": 12.27
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 9.71
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "Garden Reach Shipbuilders & Engineers",
+        "pct_change": 9.51
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 9.0
+      },
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "Nuvama Wealth Management",
+        "pct_change": 8.81
+      },
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 8.57
+      }
+    ]
   }
 ]
