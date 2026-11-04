@@ -3778,5 +3778,110 @@
         "pct_change": 6.71
       }
     ]
+  },
+  {
+    "date": "2026-11-04",
+    "movers": [
+      {
+        "ticker": "GRAVITA.NS",
+        "name": "Gravita India",
+        "pct_change": 10.36
+      },
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": 13.21
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 16.43
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 12.09
+      },
+      {
+        "ticker": "NBCC.NS",
+        "name": "NBCC (India)",
+        "pct_change": 11.31
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 15.09
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "Garden Reach Shipbuilders & Engineers",
+        "pct_change": 12.95
+      },
+      {
+        "ticker": "ITI.NS",
+        "name": "ITI Ltd",
+        "pct_change": 15.31
+      },
+      {
+        "ticker": "JYOTICNC.NS",
+        "name": "Jyoti CNC Automation",
+        "pct_change": 11.38
+      },
+      {
+        "ticker": "CHAMBLFERT.NS",
+        "name": "Chambal Fertilisers & Chemicals",
+        "pct_change": 9.62
+      },
+      {
+        "ticker": "TRITURBINE.NS",
+        "name": "Triveni Turbine",
+        "pct_change": 9.53
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 8.9
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 8.81
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 8.57
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 8.44
+      },
+      {
+        "ticker": "MRPL.NS",
+        "name": "Mangalore Refinery & Petrochemicals",
+        "pct_change": 8.23
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML Ltd",
+        "pct_change": 8.06
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 7.63
+      },
+      {
+        "ticker": "GMDCLTD.NS",
+        "name": "Gujarat Mineral Development Corporation",
+        "pct_change": 7.53
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 7.5
+      }
+    ]
   }
 ]
