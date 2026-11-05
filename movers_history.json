@@ -3883,5 +3883,110 @@
         "pct_change": 7.5
       }
     ]
+  },
+  {
+    "date": "2026-11-05",
+    "movers": [
+      {
+        "ticker": "RELIANCE.NS",
+        "name": "Reliance Industries",
+        "pct_change": 12.51
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 11.22
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 11.72
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 11.07
+      },
+      {
+        "ticker": "NBCC.NS",
+        "name": "NBCC (India)",
+        "pct_change": 11.65
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 16.34
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 17.15
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "Garden Reach Shipbuilders & Engineers",
+        "pct_change": 11.13
+      },
+      {
+        "ticker": "ITI.NS",
+        "name": "ITI Ltd",
+        "pct_change": 12.92
+      },
+      {
+        "ticker": "RAMCOCEM.NS",
+        "name": "The Ramco Cements",
+        "pct_change": 11.23
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 11.02
+      },
+      {
+        "ticker": "TRITURBINE.NS",
+        "name": "Triveni Turbine",
+        "pct_change": 9.69
+      },
+      {
+        "ticker": "TENNIND.NS",
+        "name": "Tenneco Clean Air India",
+        "pct_change": 9.23
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 9.05
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 8.42
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 8.24
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 7.91
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFin Technologies",
+        "pct_change": 7.75
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 7.58
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 7.52
+      }
+    ]
   }
 ]
