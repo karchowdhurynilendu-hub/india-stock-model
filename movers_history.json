@@ -4093,5 +4093,110 @@
         "pct_change": 11.94
       }
     ]
+  },
+  {
+    "date": "2026-11-09",
+    "movers": [
+      {
+        "ticker": "SONATSOFTW.NS",
+        "name": "Sonata Software",
+        "pct_change": 13.28
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 14.02
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 11.51
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 16.55
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 13.39
+      },
+      {
+        "ticker": "CROMPTON.NS",
+        "name": "Crompton Greaves Consumer Electricals",
+        "pct_change": 12.26
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "Groww (Billionbrains Garage Ventures)",
+        "pct_change": 13.1
+      },
+      {
+        "ticker": "HSCL.NS",
+        "name": "Himadri Speciality Chemical",
+        "pct_change": 10.2
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 19.09
+      },
+      {
+        "ticker": "JYOTICNC.NS",
+        "name": "Jyoti CNC Automation",
+        "pct_change": 10.09
+      },
+      {
+        "ticker": "RAMCOCEM.NS",
+        "name": "The Ramco Cements",
+        "pct_change": 13.95
+      },
+      {
+        "ticker": "GMDCLTD.NS",
+        "name": "Gujarat Mineral Development Corporation",
+        "pct_change": 12.65
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 11.56
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 9.94
+      },
+      {
+        "ticker": "ASTERDM.NS",
+        "name": "Aster DM Healthcare",
+        "pct_change": 8.85
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 8.6
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 8.53
+      },
+      {
+        "ticker": "DEVYANI.NS",
+        "name": "Devyani International",
+        "pct_change": 8.53
+      },
+      {
+        "ticker": "MANAPPURAM.NS",
+        "name": "Manappuram Finance",
+        "pct_change": 8.39
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 8.31
+      }
+    ]
   }
 ]
