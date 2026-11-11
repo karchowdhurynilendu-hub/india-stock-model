@@ -4303,5 +4303,110 @@
         "pct_change": 8.31
       }
     ]
+  },
+  {
+    "date": "2026-11-11",
+    "movers": [
+      {
+        "ticker": "SONATSOFTW.NS",
+        "name": "Sonata Software",
+        "pct_change": 12.32
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 11.18
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBL Bank",
+        "pct_change": 10.75
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 13.34
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 23.03
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 11.33
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 23.13
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 14.37
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 11.47
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 11.72
+      },
+      {
+        "ticker": "RAMCOCEM.NS",
+        "name": "The Ramco Cements",
+        "pct_change": 12.97
+      },
+      {
+        "ticker": "AARTIIND.NS",
+        "name": "Aarti Industries",
+        "pct_change": 10.04
+      },
+      {
+        "ticker": "GMDCLTD.NS",
+        "name": "Gujarat Mineral Development Corporation",
+        "pct_change": 16.46
+      },
+      {
+        "ticker": "DEVYANI.NS",
+        "name": "Devyani International",
+        "pct_change": 12.13
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 10.72
+      },
+      {
+        "ticker": "FIVESTAR.NS",
+        "name": "Fivestar Business Finance",
+        "pct_change": 12.45
+      },
+      {
+        "ticker": "GPIL.NS",
+        "name": "Godawari Power & Ispat",
+        "pct_change": 12.22
+      },
+      {
+        "ticker": "INOXWIND.NS",
+        "name": "Inox Wind",
+        "pct_change": 10.87
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 13.56
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI Ltd",
+        "pct_change": 9.94
+      }
+    ]
   }
 ]
