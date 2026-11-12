@@ -4408,5 +4408,110 @@
         "pct_change": 9.94
       }
     ]
+  },
+  {
+    "date": "2026-11-12",
+    "movers": [
+      {
+        "ticker": "SONATSOFTW.NS",
+        "name": "Sonata Software",
+        "pct_change": 13.81
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 10.26
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 13.58
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 11.35
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 14.69
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 13.16
+      },
+      {
+        "ticker": "PINELABS.NS",
+        "name": "Pine Labs",
+        "pct_change": 11.49
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 23.23
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "Karur Vysya Bank",
+        "pct_change": 10.67
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 10.49
+      },
+      {
+        "ticker": "FIVESTAR.NS",
+        "name": "Fivestar Business Finance",
+        "pct_change": 13.08
+      },
+      {
+        "ticker": "SIGNATURE.NS",
+        "name": "Signatureglobal (India)",
+        "pct_change": 9.97
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 9.91
+      },
+      {
+        "ticker": "IRCON.NS",
+        "name": "Ircon International",
+        "pct_change": 9.77
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 9.73
+      },
+      {
+        "ticker": "DEVYANI.NS",
+        "name": "Devyani International",
+        "pct_change": 9.61
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 9.3
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 9.26
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 8.32
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 8.16
+      }
+    ]
   }
 ]
