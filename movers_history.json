@@ -4513,5 +4513,110 @@
         "pct_change": 8.16
       }
     ]
+  },
+  {
+    "date": "2026-11-13",
+    "movers": [
+      {
+        "ticker": "ANURAS.NS",
+        "name": "Anupam Rasayan",
+        "pct_change": 12.92
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "Navin Fluorine International",
+        "pct_change": 13.08
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "Meesho",
+        "pct_change": 10.08
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "Sai Life Sciences",
+        "pct_change": 20.97
+      },
+      {
+        "ticker": "PINELABS.NS",
+        "name": "Pine Labs",
+        "pct_change": 9.16
+      },
+      {
+        "ticker": "AARTIIND.NS",
+        "name": "Aarti Industries",
+        "pct_change": 8.72
+      },
+      {
+        "ticker": "CDSL.NS",
+        "name": "Central Depository Services",
+        "pct_change": 8.47
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 8.47
+      },
+      {
+        "ticker": "DATAPATTNS.NS",
+        "name": "Data Patterns (India)",
+        "pct_change": 7.78
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 7.29
+      },
+      {
+        "ticker": "ITI.NS",
+        "name": "ITI Ltd",
+        "pct_change": 7.1
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 7.01
+      },
+      {
+        "ticker": "BANDHANBNK.NS",
+        "name": "Bandhan Bank",
+        "pct_change": 6.88
+      },
+      {
+        "ticker": "JMFINANCIL.NS",
+        "name": "JM Financial",
+        "pct_change": 6.87
+      },
+      {
+        "ticker": "FORCEMOT.NS",
+        "name": "Force Motors",
+        "pct_change": 6.63
+      },
+      {
+        "ticker": "NEULANDLAB.NS",
+        "name": "Neuland Laboratories",
+        "pct_change": 6.55
+      },
+      {
+        "ticker": "URBANCO.NS",
+        "name": "Urban Company",
+        "pct_change": 6.5
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 6.31
+      },
+      {
+        "ticker": "GPIL.NS",
+        "name": "Godawari Power & Ispat",
+        "pct_change": 6.29
+      },
+      {
+        "ticker": "IIFL.NS",
+        "name": "IIFL Finance",
+        "pct_change": 6.05
+      }
+    ]
   }
 ]
