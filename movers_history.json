@@ -5038,5 +5038,110 @@
         "pct_change": 2.68
       }
     ]
+  },
+  {
+    "date": "2026-11-20",
+    "movers": [
+      {
+        "ticker": "APTUS.NS",
+        "name": "Aptus Value Housing",
+        "pct_change": 11.78
+      },
+      {
+        "ticker": "DEEPAKFERT.NS",
+        "name": "Deepak Fertilisers & Petrochemicals Corp",
+        "pct_change": 13.9
+      },
+      {
+        "ticker": "SIGNATURE.NS",
+        "name": "Signatureglobal (India)",
+        "pct_change": 12.11
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 8.84
+      },
+      {
+        "ticker": "IGL.NS",
+        "name": "Indraprastha Gas",
+        "pct_change": 8.75
+      },
+      {
+        "ticker": "ASTERDM.NS",
+        "name": "Aster DM Healthcare",
+        "pct_change": 7.86
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 7.75
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 7.06
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 6.93
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 6.62
+      },
+      {
+        "ticker": "FIRSTCRY.NS",
+        "name": "Brainbees Solutions (FirstCry)",
+        "pct_change": 6.11
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 5.83
+      },
+      {
+        "ticker": "CROMPTON.NS",
+        "name": "Crompton Greaves Consumer Electricals",
+        "pct_change": 5.69
+      },
+      {
+        "ticker": "TATACHEM.NS",
+        "name": "Tata Chemicals",
+        "pct_change": 5.51
+      },
+      {
+        "ticker": "SARDAEN.NS",
+        "name": "Sarda Energy & Minerals",
+        "pct_change": 5.51
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 5.32
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 5.22
+      },
+      {
+        "ticker": "DELHIVERY.NS",
+        "name": "Delhivery",
+        "pct_change": 5.18
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 4.48
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 3.86
+      }
+    ]
   }
 ]
