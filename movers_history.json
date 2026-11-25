@@ -5353,5 +5353,110 @@
         "pct_change": 3.9
       }
     ]
+  },
+  {
+    "date": "2026-11-25",
+    "movers": [
+      {
+        "ticker": "AMBER.NS",
+        "name": "Amber Enterprises India",
+        "pct_change": 11.12
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 9.57
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 8.4
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "City Union Bank",
+        "pct_change": 6.28
+      },
+      {
+        "ticker": "SARDAEN.NS",
+        "name": "Sarda Energy & Minerals",
+        "pct_change": 6.18
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 5.21
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 5.13
+      },
+      {
+        "ticker": "CROMPTON.NS",
+        "name": "Crompton Greaves Consumer Electricals",
+        "pct_change": 5.05
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 5.04
+      },
+      {
+        "ticker": "ASTERDM.NS",
+        "name": "Aster DM Healthcare",
+        "pct_change": 4.98
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 4.93
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "Poonawalla Fincorp",
+        "pct_change": 4.65
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 4.51
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 4.3
+      },
+      {
+        "ticker": "SYNGENE.NS",
+        "name": "Syngene International",
+        "pct_change": 4.01
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 3.98
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 3.83
+      },
+      {
+        "ticker": "STARHEALTH.NS",
+        "name": "Star Health and Allied Insurance",
+        "pct_change": 3.61
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 3.54
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 3.44
+      }
+    ]
   }
 ]
