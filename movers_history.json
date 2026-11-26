@@ -5458,5 +5458,110 @@
         "pct_change": 3.44
       }
     ]
+  },
+  {
+    "date": "2026-11-26",
+    "movers": [
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 10.12
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 11.05
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 10.22
+      },
+      {
+        "ticker": "AMBER.NS",
+        "name": "Amber Enterprises India",
+        "pct_change": 9.45
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFin Technologies",
+        "pct_change": 6.67
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 6.66
+      },
+      {
+        "ticker": "TATATECH.NS",
+        "name": "Tata Technologies",
+        "pct_change": 6.65
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PhysicsWallah",
+        "pct_change": 6.45
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 5.92
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 5.82
+      },
+      {
+        "ticker": "SARDAEN.NS",
+        "name": "Sarda Energy & Minerals",
+        "pct_change": 5.29
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PG Electroplast",
+        "pct_change": 5.2
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 5.15
+      },
+      {
+        "ticker": "ASTERDM.NS",
+        "name": "Aster DM Healthcare",
+        "pct_change": 5.1
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 4.81
+      },
+      {
+        "ticker": "TATACHEM.NS",
+        "name": "Tata Chemicals",
+        "pct_change": 4.78
+      },
+      {
+        "ticker": "CRAFTSMAN.NS",
+        "name": "Craftsman Automation",
+        "pct_change": 4.54
+      },
+      {
+        "ticker": "GLAND.NS",
+        "name": "Gland Pharma",
+        "pct_change": 4.34
+      },
+      {
+        "ticker": "CAMS.NS",
+        "name": "Computer Age Management Services",
+        "pct_change": 4.18
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNB Housing Finance",
+        "pct_change": 4.06
+      }
+    ]
   }
 ]
