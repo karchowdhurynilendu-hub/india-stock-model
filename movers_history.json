@@ -5563,5 +5563,110 @@
         "pct_change": 4.06
       }
     ]
+  },
+  {
+    "date": "2026-11-27",
+    "movers": [
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "Aegis Logistics",
+        "pct_change": 11.01
+      },
+      {
+        "ticker": "ANGELONE.NS",
+        "name": "Angel One",
+        "pct_change": 11.76
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML Ltd",
+        "pct_change": 15.3
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "Brigade Enterprises",
+        "pct_change": 9.12
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "Cohance Lifesciences",
+        "pct_change": 8.29
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFin Technologies",
+        "pct_change": 5.66
+      },
+      {
+        "ticker": "DATAPATTNS.NS",
+        "name": "Data Patterns (India)",
+        "pct_change": 5.44
+      },
+      {
+        "ticker": "NH.NS",
+        "name": "Narayana Hrudayalaya",
+        "pct_change": 4.76
+      },
+      {
+        "ticker": "ZENSARTECH.NS",
+        "name": "Zensar Tech",
+        "pct_change": 4.31
+      },
+      {
+        "ticker": "HDFCBANK.NS",
+        "name": "HDFC Bank",
+        "pct_change": 4.31
+      },
+      {
+        "ticker": "SAGILITY.NS",
+        "name": "Sagility India",
+        "pct_change": 3.9
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "Firstsource Solutions",
+        "pct_change": 3.83
+      },
+      {
+        "ticker": "CAMS.NS",
+        "name": "Computer Age Management Services",
+        "pct_change": 3.68
+      },
+      {
+        "ticker": "WELCORP.NS",
+        "name": "Welspun Corp",
+        "pct_change": 3.48
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "Affle (India)",
+        "pct_change": 3.36
+      },
+      {
+        "ticker": "ITI.NS",
+        "name": "ITI Ltd",
+        "pct_change": 3.28
+      },
+      {
+        "ticker": "TENNIND.NS",
+        "name": "Tenneco Clean Air India",
+        "pct_change": 3.14
+      },
+      {
+        "ticker": "CREDITACC.NS",
+        "name": "CreditAccess Grameen",
+        "pct_change": 2.93
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "Garden Reach Shipbuilders & Engineers",
+        "pct_change": 2.79
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "Wockhardt",
+        "pct_change": 2.62
+      }
+    ]
   }
 ]
